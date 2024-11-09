@@ -20,6 +20,8 @@ func Start() {
 	serveFile("/error_404.wasm" /* */, "./web/static/wasm/error_404.wasm")
 	serveFile("/index.wasm" /*     */, "./web/static/wasm/index.wasm")
 
+	servePage("/" /* */, "/index.wasm")
+
 	if err := http.ListenAndServe(env.ServerAddress(), nil); err != nil {
 
 		panic(err)

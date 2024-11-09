@@ -1,7 +1,12 @@
 package server
 
 import (
+	"net/http"
 	"text/template"
+)
+
+import (
+	"dummy_ai/pkg/env"
 )
 
 var (
@@ -9,4 +14,9 @@ var (
 )
 
 func Start() {
+
+	if err := http.ListenAndServe(env.ServerAddress(), nil); err != nil {
+
+		panic(err)
+	}
 }

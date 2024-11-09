@@ -33,3 +33,17 @@ func serveFile(route string, file string) {
 		http.ServeFile(responseWriter, request, file)
 	})
 }
+
+func executeServerTemplate(responseWriter http.ResponseWriter, wasmRoute string) {
+
+	if err := serverTemplate.Execute(responseWriter, wasmRoute); err != nil {
+
+		panic(err)
+	}
+}
+
+func error404(responseWriter http.ResponseWriter) {
+
+	responseWriter.WriteHeader(http.StatusNotFound)
+	executeServerTemplate(responseWriter, "/error_404.wasm")
+}

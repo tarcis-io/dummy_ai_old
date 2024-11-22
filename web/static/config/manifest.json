@@ -10,18 +10,18 @@
 	"display"          : "standalone",
 	"icons"            : [
 		{
-			"src"   : "/favicon-192.png",
+			"src"   : "/favicon_192.png",
 			"type"  : "image/png",
 			"sizes" : "192x192"
 		},
 		{
-			"src"     : "/favicon-512-maskable.png",
+			"src"     : "/favicon_512_maskable.png",
 			"type"    : "image/png",
 			"sizes"   : "512x512",
 			"purpose" : "maskable"
 		},
 		{
-			"src"   : "/favicon-512.png",
+			"src"   : "/favicon_512.png",
 			"type"  : "image/png",
 			"sizes" : "512x512"
 		}

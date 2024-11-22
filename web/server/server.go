@@ -15,6 +15,9 @@ var (
 
 func Start() {
 
+	serveFile("/manifest.json" /*  */, "./web/static/config/manifest.json")
+	serveFile("/robots.txt" /*     */, "./web/static/config/robots.txt")
+	serveFile("/sitemap.xml" /*    */, "./web/static/config/sitemap.xml")
 	serveFile("/wasm_exec.js" /*   */, "./web/static/lib/wasm/wasm_exec.js")
 	serveFile("/wasm_start.js" /*  */, "./web/static/lib/wasm/wasm_start.js")
 	serveFile("/error_404.wasm" /* */, "./web/static/wasm/error_404.wasm")

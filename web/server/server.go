@@ -15,13 +15,21 @@ var (
 
 func Start() {
 
-	serveFile("/manifest.json" /*  */, "./web/static/config/manifest.json")
-	serveFile("/robots.txt" /*     */, "./web/static/config/robots.txt")
-	serveFile("/sitemap.xml" /*    */, "./web/static/config/sitemap.xml")
-	serveFile("/wasm_exec.js" /*   */, "./web/static/lib/wasm/wasm_exec.js")
-	serveFile("/wasm_start.js" /*  */, "./web/static/lib/wasm/wasm_start.js")
-	serveFile("/error_404.wasm" /* */, "./web/static/wasm/error_404.wasm")
-	serveFile("/index.wasm" /*     */, "./web/static/wasm/index.wasm")
+	serveFile("/manifest.json" /*            */, "./web/static/config/manifest.json")
+	serveFile("/robots.txt" /*               */, "./web/static/config/robots.txt")
+	serveFile("/sitemap.xml" /*              */, "./web/static/config/sitemap.xml")
+	serveFile("/apple_touch_icon.png" /*     */, "./web/static/img/favicon/apple_touch_icon.png")
+	serveFile("/favicon.ico" /*              */, "./web/static/img/favicon/favicon.ico")
+	serveFile("/favicon.svg" /*              */, "./web/static/img/favicon/favicon.svg")
+	serveFile("/favicon_192.png" /*          */, "./web/static/img/favicon/favicon_192.png")
+	serveFile("/favicon_512.png" /*          */, "./web/static/img/favicon/favicon_512.png")
+	serveFile("/favicon_512_maskable.png" /* */, "./web/static/img/favicon/favicon_512_maskable.png")
+	serveFile("/logo.svg" /*                 */, "./web/static/img/logo/logo.svg")
+	serveFile("/logo_white.svg" /*           */, "./web/static/img/logo/logo_white.svg")
+	serveFile("/wasm_exec.js" /*             */, "./web/static/lib/wasm/wasm_exec.js")
+	serveFile("/wasm_start.js" /*            */, "./web/static/lib/wasm/wasm_start.js")
+	serveFile("/error_404.wasm" /*           */, "./web/static/wasm/error_404.wasm")
+	serveFile("/index.wasm" /*               */, "./web/static/wasm/index.wasm")
 
 	servePage("/" /* */, "/index.wasm")
 

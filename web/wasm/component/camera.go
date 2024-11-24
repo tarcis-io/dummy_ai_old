@@ -24,3 +24,11 @@ func newCameraError() js.Value {
 
 	return cameraError
 }
+
+func newCameraStreaming() js.Value {
+
+	cameraStreaming := js.Global().Get("document").Call("createElement", "div")
+	cameraStreaming.Set("innerHTML", "Camera Streaming")
+
+	return cameraStreaming
+}

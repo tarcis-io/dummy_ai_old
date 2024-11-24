@@ -6,21 +6,21 @@ import (
 
 func NewCamera() js.Value {
 
-	return NewCameraLoading()
+	return newCameraLoading()
 }
 
-func NewCameraLoading() js.Value {
+func newCameraLoading() js.Value {
 
 	cameraLoading := js.Global().Get("document").Call("createElement", "div")
-	cameraLoading.Set("innerHTML", "CameraLoading")
+	cameraLoading.Set("innerHTML", "Camera Loading")
 
 	return cameraLoading
 }
 
-func NewCameraError() js.Value {
+func newCameraError() js.Value {
 
 	cameraError := js.Global().Get("document").Call("createElement", "div")
-	cameraError.Set("innerHTML", "CameraError")
+	cameraError.Set("innerHTML", "Camera Error")
 
 	return cameraError
 }

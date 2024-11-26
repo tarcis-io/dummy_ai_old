@@ -9,3 +9,17 @@ const (
 const (
 	DefaultLanguage = English
 )
+
+var (
+	language = preferredLanguage()
+)
+
+func Language() string {
+
+	return language
+}
+
+func preferredLanguage() string {
+
+	return English
+}

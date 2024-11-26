@@ -32,3 +32,18 @@ func preferredLanguage() string {
 
 	return English
 }
+
+func isSupportedLanguage(language string) bool {
+
+	switch language {
+
+	case English, Spanish, Portuguese:
+
+		return true
+
+	default:
+
+		return false
+
+	}
+}

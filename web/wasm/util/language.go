@@ -30,7 +30,10 @@ func SetLanguage(language string) {
 
 func preferredLanguage() string {
 
-	return English
+	language := DefaultLanguage
+	SetLanguage(language)
+
+	return language
 }
 
 func isSupportedLanguage(language string) bool {

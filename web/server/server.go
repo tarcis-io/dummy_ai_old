@@ -26,6 +26,8 @@ func Start() {
 	serveFile("/favicon_512_maskable.png" /* */, "./web/static/img/favicon/favicon_512_maskable.png")
 	serveFile("/logo.svg" /*                 */, "./web/static/img/logo/logo.svg")
 	serveFile("/logo_white.svg" /*           */, "./web/static/img/logo/logo_white.svg")
+	serveFile("/carbon.css" /*               */, "./web/static/lib/carbon/carbon.css")
+	serveFile("/carbon.js" /*                */, "./web/static/lib/carbon/carbon.js")
 	serveFile("/wasm_exec.js" /*             */, "./web/static/lib/wasm/wasm_exec.js")
 	serveFile("/wasm_start.js" /*            */, "./web/static/lib/wasm/wasm_start.js")
 	serveFile("/error_404.wasm" /*           */, "./web/static/wasm/error_404.wasm")

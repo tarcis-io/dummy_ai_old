@@ -2,18 +2,22 @@ package util
 
 const (
 	App = iota
+	CameraLoading
 )
 
 var (
 	allMessages = map[string]map[int]string{
 		English: {
-			App: "DummyAI",
+			App:           "DummyAI",
+			CameraLoading: "Loading...",
 		},
 		Spanish: {
-			App: "DummyAI",
+			App:           "DummyAI",
+			CameraLoading: "Cargando...",
 		},
 		Portuguese: {
-			App: "DummyAI",
+			App:           "DummyAI",
+			CameraLoading: "Carregando...",
 		},
 	}
 	messages = allMessages[language]

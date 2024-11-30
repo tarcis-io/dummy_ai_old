@@ -4,6 +4,10 @@ import (
 	"syscall/js"
 )
 
+import (
+	"dummy_ai/web/wasm/util"
+)
+
 func NewCamera() js.Value {
 
 	return newCameraLoading()
@@ -11,8 +15,9 @@ func NewCamera() js.Value {
 
 func newCameraLoading() js.Value {
 
-	cameraLoading := js.Global().Get("document").Call("createElement", "div")
-	cameraLoading.Set("innerHTML", "CameraLoading")
+	inlineLoading := js.Global().Get("document").Call("createElement", "cds-inline-loading")
+	inlineLoading.Set("status", "active")
+	inlineLoading.Set("innerHTML", util.Message(util.CameraLoading))
 
-	return cameraLoading
+	return inlineLoading
 }

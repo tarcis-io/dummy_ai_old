@@ -15,7 +15,7 @@ func main() {
 
 	camera := component.NewCamera()
 
-	body := js.Global().Get("document").Get("body")
-	body.Call("appendChild", h2)
-	body.Call("appendChild", camera)
+	app := js.Global().Get("document").Call("getElementById", "app")
+	app.Call("appendChild", h2)
+	app.Call("appendChild", camera)
 }

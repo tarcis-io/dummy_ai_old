@@ -16,8 +16,7 @@ func NewCamera() js.Value {
 func newCameraLoading() js.Value {
 
 	inlineLoading := js.Global().Get("document").Call("createElement", "cds-inline-loading")
-	inlineLoading.Set("status", "active")
-	inlineLoading.Set("innerHTML", util.Message(util.CameraLoading))
+	inlineLoading.Call("setAttribute", "assistive-text", util.Message(util.CameraLoading))
 
 	return inlineLoading
 }

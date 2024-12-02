@@ -18,5 +18,8 @@ func newCameraLoading() js.Value {
 	inlineLoading := js.Global().Get("document").Call("createElement", "cds-inline-loading")
 	inlineLoading.Call("setAttribute", "assistive-text", util.Message(util.CameraLoading))
 
-	return inlineLoading
+	tile := js.Global().Get("document").Call("createElement", "cds-tile")
+	tile.Call("appendChild", inlineLoading)
+
+	return tile
 }

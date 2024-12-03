@@ -15,3 +15,9 @@
 	background-color : var(--cds-background);
 	color            : var(--cds-text-primary);
 }
+
+.center-content {
+	display         : flex;
+	justify-content : center;
+	align-items     : center;
+}

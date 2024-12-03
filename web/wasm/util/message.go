@@ -1,39 +1,34 @@
 package util
 
 const (
-	App = iota
-	CameraLoading
+	app = iota
+	cameraLoading
 )
 
 var (
 	allMessages = map[string]map[int]string{
 		English: {
-			App:           "DummyAI",
-			CameraLoading: "Loading...",
+			app:           "DummyAI",
+			cameraLoading: "Loading...",
 		},
 		Spanish: {
-			App:           "DummyAI",
-			CameraLoading: "Cargando...",
+			app:           "DummyAI",
+			cameraLoading: "Cargando...",
 		},
 		Portuguese: {
-			App:           "DummyAI",
-			CameraLoading: "Carregando...",
+			app:           "DummyAI",
+			cameraLoading: "Carregando...",
 		},
 	}
 	messages = allMessages[language]
 )
 
-func AllMessages() map[string]map[int]string {
+func App() string {
 
-	return allMessages
+	return messages[app]
 }
 
-func Messages() map[int]string {
+func CameraLoading() string {
 
-	return messages
-}
-
-func Message(key int) string {
-
-	return messages[key]
+	return messages[cameraLoading]
 }

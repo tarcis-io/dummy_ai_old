@@ -7,7 +7,7 @@ import (
 func CreateApp(page js.Value) js.Value {
 
 	div := js.Global().Get("document").Call("createElement", "div")
-	div.Get("classList").Call("append", "cds-theme-zone-g100")
+	div.Get("classList").Call("add", "cds-theme-zone-g100")
 	div.Get("style").Set("font-family", "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif")
 	div.Get("style").Set("position", "fixed")
 	div.Get("style").Set("top", "0")

@@ -4,20 +4,3 @@
 * {
 	box-sizing : border-box;
 }
-
-#app {
-	font-family      : 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
-	position         : fixed;
-	top              : 0;
-	right            : 0;
-	bottom           : 0;
-	left             : 0;
-	background-color : var(--cds-background);
-	color            : var(--cds-text-primary);
-}
-
-.center-content {
-	display         : flex;
-	justify-content : center;
-	align-items     : center;
-}

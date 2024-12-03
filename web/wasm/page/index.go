@@ -15,7 +15,12 @@ func main() {
 
 	camera := component.NewCamera()
 
-	app := js.Global().Get("document").Call("getElementById", "app")
-	app.Call("appendChild", h2)
-	app.Call("appendChild", camera)
+	page := js.Global().Get("document").Call("createElement", "div")
+	page.Call("appendChild", h2)
+	page.Call("appendChild", camera)
+
+	app := component.CreateApp(page)
+
+	body := js.Global().Get("document").Get("body")
+	body.Call("appendChild", app)
 }

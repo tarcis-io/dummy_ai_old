@@ -5,6 +5,10 @@
 	box-sizing : border-box;
 }
 
+#app {
+	--cds-interactive : #EE0000;
+}
+
 #camera-loading {
 	display         : flex;
 	justify-content : center;

@@ -4,3 +4,13 @@
 * {
 	box-sizing : border-box;
 }
+
+#camera-loading {
+	display         : flex;
+	justify-content : center;
+	align-items     : center;
+}
+
+#camera-loading cds-inline-loading {
+	width : auto;
+}

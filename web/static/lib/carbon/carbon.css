@@ -4,9 +4,3 @@
 * {
 	box-sizing : border-box;
 }
-
-cds-tile.center-content {
-	display         : flex;
-	justify-content : center;
-	align-items     : center;
-}

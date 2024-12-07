@@ -8,6 +8,7 @@
 #app {
 	--cds-interactive : #EE0000;
 
+	font-family       : 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 	position          : fixed;
 	top               : 0;
 	right             : 0;

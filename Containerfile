@@ -5,3 +5,8 @@ COPY . .
 
 RUN go mod download
 RUN GOOS=js GOARCH=wasm go build -o /app /cmd/dummy_ai/main.go
+
+FROM scratch
+
+WORKDIR /
+COPY --from=build /app .

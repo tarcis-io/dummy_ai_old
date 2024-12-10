@@ -11,7 +11,7 @@ import (
 func main() {
 
 	page := js.Global().Get("document").Call("createElement", "div")
-	page.Call("appendChild", component.NewCamera())
+	page.Call("appendChild", component.CreateCamera())
 
 	app := component.CreateApp(page)
 

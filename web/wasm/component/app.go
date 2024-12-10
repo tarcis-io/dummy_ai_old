@@ -4,6 +4,10 @@ import (
 	"syscall/js"
 )
 
+import (
+	"dummy_ai/web/wasm/util"
+)
+
 func CreateApp(page js.Value) js.Value {
 
 	div := js.Global().Get("document").Call("createElement", "div")
@@ -19,4 +23,15 @@ func CreateApp(page js.Value) js.Value {
 	div.Call("appendChild", page)
 
 	return div
+}
+
+func createAppHeader() js.Value {
+
+	headerName := js.Global().Get("document").Call("createElement", "cds-header-name")
+	headerName.Set("innerHTML", util.App())
+
+	header := js.Global().Get("document").Call("createElement", "cds-header")
+	header.Call("appendChild", headerName)
+
+	return header
 }

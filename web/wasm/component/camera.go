@@ -4,22 +4,18 @@ import (
 	"syscall/js"
 )
 
-import (
-	"dummy_ai/web/wasm/util"
-)
+func CreateCamera() js.Value {
 
-func NewCamera() js.Value {
-
-	return newCameraLoading()
+	return createCameraLoading()
 }
 
-func newCameraLoading() js.Value {
+func createCameraLoading() js.Value {
 
-	inlineLoading := js.Global().Get("document").Call("createElement", "cds-inline-loading")
-	inlineLoading.Call("setAttribute", "assistive-text", util.CameraLoading())
+	loading := js.Global().Get("document").Call("createElement", "cds-loading")
 
 	tile := js.Global().Get("document").Call("createElement", "cds-tile")
-	tile.Call("appendChild", inlineLoading)
+	tile.Set("id", "camera-loading")
+	tile.Call("appendChild", loading)
 
 	return tile
 }

@@ -10,14 +10,8 @@ import (
 
 func main() {
 
-	h2 := js.Global().Get("document").Call("createElement", "h2")
-	h2.Set("innerHTML", "Hello World, DummyAI!")
-
-	camera := component.NewCamera()
-
 	page := js.Global().Get("document").Call("createElement", "div")
-	page.Call("appendChild", h2)
-	page.Call("appendChild", camera)
+	page.Call("appendChild", component.NewCamera())
 
 	app := component.CreateApp(page)
 

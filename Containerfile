@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . .
 
 RUN go mod download
-RUN GOOS=js GOARCH=wasm go build -C /cmd/dummy_ai -o /app
+RUN GOOS=js GOARCH=wasm go build -C cmd/dummy_ai -o /app
 
 FROM scratch
 

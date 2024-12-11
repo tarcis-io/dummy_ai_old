@@ -9,7 +9,7 @@ RUN go build -o /app ./cmd/dummy_ai
 FROM scratch
 
 WORKDIR /
-COPY --from=build /app /app
+COPY --from=build /app/app /app
 
 EXPOSE 3000
 

@@ -9,7 +9,7 @@ RUN GOOS=js GOARCH=wasm go build -o /app ./cmd/dummy_ai
 FROM scratch
 
 WORKDIR /
-COPY --from=build /app .
+COPY --from=build /app /app
 
 EXPOSE 3000
 

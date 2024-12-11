@@ -13,3 +13,9 @@ FROM scratch
 WORKDIR /app
 
 COPY --from=build ./app/dummy_ai .
+
+USER 1001
+
+EXPOSE 3000
+
+ENTRYPOINT ["/dummy_ai"]

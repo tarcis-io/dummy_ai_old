@@ -11,3 +11,5 @@ RUN go build ./cmd/dummy_ai
 FROM scratch
 
 WORKDIR /app
+
+COPY --from=build ./app/dummy_ai .

@@ -6,7 +6,7 @@ COPY go.mod go.sum .
 RUN go mod download
 
 COPY . .
-RUN go build ./cmd/dummy_ai
+RUN CGO_ENABLED=0 go build ./cmd/dummy_ai
 
 FROM scratch
 

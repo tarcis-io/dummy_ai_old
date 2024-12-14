@@ -18,7 +18,10 @@ RUN CGO_ENABLED=0 go build ./cmd/dummy_ai
 FROM scratch
 
 COPY . .
-COPY --from=build ./build/dummy_ai .
+
+COPY --from=build     \
+     ./build/dummy_ai \
+     .
 
 USER 1001
 

@@ -16,6 +16,7 @@ func CreateCamera() js.Value {
 func createCameraLoading() js.Value {
 
 	loading := js.Global().Get("document").Call("createElement", "cds-loading")
+	loading.Set("type", "small")
 	loading.Set("assistiveText", util.CameraLoading())
 
 	tile := js.Global().Get("document").Call("createElement", "cds-tile")

@@ -8,7 +8,11 @@ COPY go.mod \
 
 RUN go mod download
 
-COPY . .
+COPY cmd/dummy_ai/main.go \
+     pkg/env/env.go       \
+     web/server/server.go \
+     .
+
 RUN CGO_ENABLED=0 go build ./cmd/dummy_ai
 
 FROM scratch

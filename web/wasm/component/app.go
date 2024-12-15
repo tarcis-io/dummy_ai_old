@@ -14,7 +14,7 @@ func CreateApp(page js.Value) js.Value {
 	div.Set("id", "app")
 	div.Set("className", "cds-theme-zone-g100")
 	div.Call("appendChild", createAppHeader())
-	div.Call("appendChild", page)
+	div.Call("appendChild", createAppPageContainer(page))
 
 	return div
 }

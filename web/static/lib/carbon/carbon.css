@@ -18,6 +18,15 @@
 	color             : var(--cds-text-primary);
 }
 
+#app-page-container {
+	position   : fixed;
+	top        : var(--cds-spacing-09);
+	right      : 0;
+	bottom     : 0;
+	left       : 0;
+	overflow-y : auto;
+}
+
 #camera-loading {
 	display         : flex;
 	justify-content : center;

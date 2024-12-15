@@ -29,3 +29,12 @@ func createAppHeader() js.Value {
 
 	return header
 }
+
+func createAppPageContainer(page js.Value) js.Value {
+
+	div := js.Global().Get("document").Call("createElement", "div")
+	div.Set("id", "app-page-container")
+	div.Call("appendChild", page)
+
+	return div
+}

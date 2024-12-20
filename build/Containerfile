@@ -6,3 +6,12 @@ COPY go.mod \
      .
 
 RUN go mod download
+
+COPY cmd/dummy_ai/main.go \
+     cmd/dummy_ai/
+
+COPY pkg/env/env.go \
+     pkg/env/
+
+COPY web/server/server.go \
+     web/server/

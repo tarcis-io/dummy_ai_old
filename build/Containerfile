@@ -1,48 +1,8 @@
 FROM golang:1.23.4 AS build
-
 WORKDIR /build
 
 COPY go.mod \
      go.sum \
-     ./
+     build/
 
 RUN go mod download
-
-COPY cmd/dummy_ai/main.go \
-     pkg/env/env.go       \
-     web/server/server.go \
-     ./
-
-RUN CGO_ENABLED=0 go build ./cmd/dummy_ai
-
-FROM scratch
-
-COPY web/server/server.html                          \
-     web/static/config/manifest.json                 \
-     web/static/config/robots.txt                    \
-     web/static/config/sitemap.xml                   \
-     web/static/img/favicon/apple_touch_icon.png     \
-     web/static/img/favicon/favicon.ico              \
-     web/static/img/favicon/favicon.svg              \
-     web/static/img/favicon/favicon_192.png          \
-     web/static/img/favicon/favicon_512.png          \
-     web/static/img/favicon/favicon_512_maskable.png \
-     web/static/img/logo/logo.svg                    \
-     web/static/img/logo/logo_white.svg              \
-     web/static/lib/carbon/carbon.css                \
-     web/static/lib/carbon/carbon.js                 \
-     web/static/lib/wasm/wasm_exec.js                \
-     web/static/lib/wasm/wasm_start.js               \
-     web/static/wasm/error_404.wasm                  \
-     web/static/wasm/index.wasm                      \
-     ./
-
-COPY --from=build     \
-     ./build/dummy_ai \
-     ./
-
-USER 1001
-
-EXPOSE 3000
-
-ENTRYPOINT ["/dummy_ai"]

@@ -4,14 +4,14 @@ WORKDIR /build
 
 COPY go.mod \
      go.sum \
-     .
+     ./
 
 RUN go mod download
 
 COPY cmd/dummy_ai/main.go \
      pkg/env/env.go       \
      web/server/server.go \
-     .
+     ./
 
 RUN CGO_ENABLED=0 go build ./cmd/dummy_ai
 
@@ -35,11 +35,11 @@ COPY web/server/server.html                          \
      web/static/lib/wasm/wasm_start.js               \
      web/static/wasm/error_404.wasm                  \
      web/static/wasm/index.wasm                      \
-     .
+     ./
 
 COPY --from=build     \
      ./build/dummy_ai \
-     .
+     ./
 
 USER 1001
 

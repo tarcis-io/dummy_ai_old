@@ -15,3 +15,5 @@ COPY pkg/env/env.go \
 
 COPY web/server/server.go \
      web/server/
+
+RUN CGO_ENABLED=0 go build ./cmd/dummy_ai/

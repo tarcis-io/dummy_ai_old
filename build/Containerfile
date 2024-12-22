@@ -27,3 +27,6 @@ COPY --from=build \
 
 COPY web/server/server.html \
      web/server/
+
+COPY web/static/ \
+     web/static/

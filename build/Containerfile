@@ -24,3 +24,6 @@ WORKDIR /app
 COPY --from=build \
      dummy_ai \
      .
+
+COPY web/server/server.html \
+     web/server/

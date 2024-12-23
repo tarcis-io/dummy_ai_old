@@ -30,6 +30,8 @@ COPY web/server/server.html \
 COPY web/static/ \
      web/static/
 
+USER 1001
+
 EXPOSE 8080
 
 ENTRYPOINT ["./dummy_ai"]

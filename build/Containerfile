@@ -32,4 +32,4 @@ COPY web/static/ \
 
 EXPOSE 8080
 
-ENTRYPOINT ["dummy_ai"]
+ENTRYPOINT ["./dummy_ai"]

@@ -5,7 +5,7 @@ import (
 )
 
 var (
-	serverAddress = getEnv("SERVER_ADDRESS", ":3000")
+	serverAddress = getEnv("SERVER_ADDRESS", ":8080")
 )
 
 func ServerAddress() string {

@@ -1,37 +1,9 @@
+ENV APP_PATH /app
+ENV CGO_ENABLED 0
+
 FROM golang:1.23.4 AS build
-WORKDIR /build
 
-COPY go.mod \
-     go.sum \
-     .
+ENV APP_PATH
+ENV CGO_ENABLED
 
-RUN go mod download
-
-COPY cmd/dummy_ai/main.go \
-     cmd/dummy_ai/
-
-COPY pkg/env/env.go \
-     pkg/env/
-
-COPY web/server/server.go \
-     web/server/
-
-RUN CGO_ENABLED=0 go build ./cmd/dummy_ai/
-
-FROM scratch
-WORKDIR /app
-
-COPY --from=build build/dummy_ai \
-     .
-
-COPY web/server/server.html \
-     web/server/
-
-COPY web/static/ \
-     web/static/
-
-USER 1001
-
-EXPOSE 8080
-
-ENTRYPOINT ["./dummy_ai"]
+WORKDIR $APP_PATH

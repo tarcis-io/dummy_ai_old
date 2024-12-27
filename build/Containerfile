@@ -19,6 +19,7 @@ ARG PORT=8080
 
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build build/app .
+COPY web/server/server.html web/server/
 COPY web/static/ web/static/
 
 USER app-user

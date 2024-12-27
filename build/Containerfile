@@ -1,5 +1,11 @@
 FROM golang:1.23.4 AS build
 WORKDIR /build
 
+RUN useradd -u 10001 app-user
+
 FROM scratch AS app
 WORKDIR /app
+
+COPY --from=build /etc/passwd /etc/passwd
+
+USER app-user

@@ -9,12 +9,16 @@ RUN go mod download
 COPY cmd/dummy_ai/main.go cmd/dummy_ai/
 COPY pkg/env/env.go pkg/env/
 COPY web/server/server.go web/server/
-RUN CGO_ENABLED=0 go build -o app .cmd/dummy_ai/
+RUN CGO_ENABLED=0 go build -o app ./cmd/dummy_ai/
 
 FROM scratch AS app
 WORKDIR /app
 
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build build/app .
+COPY web/static/ web/static/
 
 USER app-user
+EXPOSE 8080
+
+ENTRYPOINT ./app

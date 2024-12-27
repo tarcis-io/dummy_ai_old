@@ -24,4 +24,4 @@ COPY web/static/ web/static/
 USER app-user
 EXPOSE $PORT
 
-ENTRYPOINT SERVER_ADDRESS=$HOST:$PORT ./app
+ENTRYPOINT ["SERVER_ADDRESS=$HOST:$PORT", "./app"]

@@ -1,11 +1,5 @@
-ENV APP_PATH /app
-ENV CGO_ENABLED 0
-
 FROM golang:1.23.4 AS build
+WORKDIR /build
 
-ENV APP_PATH
-ENV CGO_ENABLED
-
-WORKDIR $APP_PATH
-
-RUN useradd -u 10001 nobody
+FROM scratch AS app
+WORKDIR /app

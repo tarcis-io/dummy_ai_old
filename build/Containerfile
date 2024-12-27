@@ -14,11 +14,14 @@ RUN CGO_ENABLED=0 go build -o app ./cmd/dummy_ai/
 FROM scratch AS app
 WORKDIR /app
 
+ARG HOST=localhost
+ARG PORT=8080
+
 COPY --from=build /etc/passwd /etc/passwd
 COPY --from=build build/app .
 COPY web/static/ web/static/
 
 USER app-user
-EXPOSE 8080
+EXPOSE $PORT
 
-ENTRYPOINT ./app
+ENTRYPOINT SERVER_ADDRESS=$HOST:$PORT ./app

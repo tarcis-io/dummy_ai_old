@@ -7,3 +7,5 @@ ENV APP_PATH
 ENV CGO_ENABLED
 
 WORKDIR $APP_PATH
+
+RUN useradd -u 10001 nobody

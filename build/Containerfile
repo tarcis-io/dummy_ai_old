@@ -1,6 +1,8 @@
 FROM golang:1.23.4 AS build
 WORKDIR /build
 
+RUN useradd -u 10001 app-user
+
 COPY go.mod go.sum .
 RUN go mod download
 
@@ -8,8 +10,6 @@ COPY cmd/dummy_ai/main.go cmd/dummy_ai/
 COPY pkg/env/env.go pkg/env/
 COPY web/server/server.go web/server/
 RUN CGO_ENABLED=0 go build -o app ./cmd/dummy_ai/
-
-RUN useradd -u 10001 app-user
 
 FROM scratch AS app
 WORKDIR /app

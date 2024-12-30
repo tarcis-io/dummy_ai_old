@@ -15,11 +15,12 @@ FROM scratch AS app
 WORKDIR /app
 
 COPY --from=build /etc/passwd /etc/passwd
-COPY --from=build build/app .
-COPY web/server/server.html web/server/
-COPY web/static/ web/static/
-
 USER app-user
+
+COPY --chown=app-user:app-user --from=build build/app .
+COPY --chown=app-user:app-user web/server/server.html web/server/
+COPY --chown=app-user:app-user web/static/ web/static/
+
 EXPOSE 8080
 
 ENTRYPOINT ["./app"]

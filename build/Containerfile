@@ -17,9 +17,9 @@ WORKDIR /app
 COPY --from=build /etc/passwd /etc/passwd
 USER app-user
 
-COPY --chown=app-user:app-user --from=build build/app .
-COPY --chown=app-user:app-user web/server/server.html web/server/
-COPY --chown=app-user:app-user web/static/ web/static/
+COPY --chown=app-user --from=build build/app .
+COPY --chown=app-user web/server/server.html web/server/
+COPY --chown=app-user web/static/ web/static/
 
 EXPOSE 8080
 

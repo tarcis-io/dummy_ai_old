@@ -10,7 +10,7 @@ import (
 
 func CreateCamera() js.Value {
 
-	return createCameraError("Error!!!")
+	return createCameraError("Error!")
 }
 
 func createCameraLoading() js.Value {
@@ -19,7 +19,10 @@ func createCameraLoading() js.Value {
 	loading.Set("type", "small")
 	loading.Set("assistiveText", util.CameraLoading())
 
-	return createCameraTile("camera-loading", loading)
+	cameraTile := createCameraTile("camera-loading")
+	cameraTile.Call("appendChild", loading)
+
+	return cameraTile
 }
 
 func createCameraError(title string) js.Value {
@@ -27,14 +30,16 @@ func createCameraError(title string) js.Value {
 	div := js.Global().Get("document").Call("createElement", "div")
 	div.Set("innerHTML", title)
 
-	return createCameraTile("camera-error", div)
+	cameraTile := createCameraTile("camera-loading")
+	cameraTile.Call("appendChild", div)
+
+	return cameraTile
 }
 
-func createCameraTile(id string, child js.Value) js.Value {
+func createCameraTile(id string) js.Value {
 
 	tile := js.Global().Get("document").Call("createElement", "cds-tile")
 	tile.Set("id", id)
-	tile.Call("appendChild", child)
 
 	return tile
 }

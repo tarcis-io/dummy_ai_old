@@ -25,3 +25,11 @@ func createCameraLoading() js.Value {
 
 	return tile
 }
+
+func createCameraError(title string, text string) js.Value {
+
+	div := js.Global().Get("document").Call("createElement", "div")
+	div.Set("innerHTML", title)
+
+	return div
+}

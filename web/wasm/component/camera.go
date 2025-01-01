@@ -19,11 +19,7 @@ func createCameraLoading() js.Value {
 	loading.Set("type", "small")
 	loading.Set("assistiveText", util.CameraLoading())
 
-	tile := js.Global().Get("document").Call("createElement", "cds-tile")
-	tile.Set("id", "camera-loading")
-	tile.Call("appendChild", loading)
-
-	return tile
+	return createCameraTile("camera-loading", loading)
 }
 
 func createCameraError(title string, text string) js.Value {
@@ -31,9 +27,14 @@ func createCameraError(title string, text string) js.Value {
 	div := js.Global().Get("document").Call("createElement", "div")
 	div.Set("innerHTML", title)
 
+	return createCameraTile("camera-error", div)
+}
+
+func createCameraTile(id string, child js.Value) js.Value {
+
 	tile := js.Global().Get("document").Call("createElement", "cds-tile")
-	tile.Set("id", "camera-error")
-	tile.Call("appendChild", div)
+	tile.Set("id", id)
+	tile.Call("appendChild", child)
 
 	return tile
 }

@@ -3,21 +3,25 @@ package util
 const (
 	app = iota
 	cameraLoading
+	cameraReloadPage
 )
 
 var (
 	allMessages = map[string]map[int]string{
 		English: {
-			app:           "DummyAI",
-			cameraLoading: "Loading...",
+			app:              "DummyAI",
+			cameraLoading:    "Loading...",
+			cameraReloadPage: "Reload page",
 		},
 		Spanish: {
-			app:           "DummyAI",
-			cameraLoading: "Cargando...",
+			app:              "DummyAI",
+			cameraLoading:    "Cargando...",
+			cameraReloadPage: "Recargar página",
 		},
 		Portuguese: {
-			app:           "DummyAI",
-			cameraLoading: "Carregando...",
+			app:              "DummyAI",
+			cameraLoading:    "Carregando...",
+			cameraReloadPage: "Recarregar página",
 		},
 	}
 	messages = allMessages[language]

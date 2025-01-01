@@ -33,7 +33,7 @@ func createCameraError(title string, text string) js.Value {
 	p := js.Global().Get("document").Call("createElement", "p")
 	p.Set("innerHTML", text)
 
-	cameraTile := createCameraTile("camera-loading")
+	cameraTile := createCameraTile("camera-error")
 	cameraTile.Call("appendChild", h4)
 	cameraTile.Call("appendChild", p)
 

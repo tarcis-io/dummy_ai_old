@@ -28,10 +28,6 @@
 	overflow-y : auto;
 }
 
-#camera-error {
-	display : block;
-}
-
 #camera-loading {
 	display         : flex;
 	justify-content : center;

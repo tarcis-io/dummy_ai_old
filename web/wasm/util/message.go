@@ -36,3 +36,8 @@ func CameraLoading() string {
 
 	return messages[cameraLoading]
 }
+
+func CameraReloadPage() string {
+
+	return messages[cameraReloadPage]
+}

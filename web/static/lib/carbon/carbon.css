@@ -29,7 +29,7 @@
 }
 
 #camera-error cds-button {
-	position : relative;
+	position : absolute;
 	bottom   : var(--cds-spacing-05);
 }
 

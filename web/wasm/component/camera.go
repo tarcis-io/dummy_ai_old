@@ -10,7 +10,8 @@ import (
 
 func CreateCamera() js.Value {
 
-	return createCameraError("Error!", "Error with you camera...")
+	js.Global().Call("setTimeout", onCameraLoad(), 500)
+	return createCameraLoading()
 }
 
 func createCameraLoading() js.Value {
@@ -52,6 +53,14 @@ func createCameraTile(id string) js.Value {
 	tile.Set("id", id)
 
 	return tile
+}
+
+func onCameraLoad() js.Func {
+
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+
+		return nil
+	})
 }
 
 func onCameraErrorButtonClick() js.Func {

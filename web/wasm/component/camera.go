@@ -36,6 +36,7 @@ func createCameraError(title string, text string) js.Value {
 	button := js.Global().Get("document").Call("createElement", "cds-button")
 	button.Set("kind", "danger")
 	button.Set("innerHTML", util.CameraReloadPage())
+	button.Call("addEventListener", "click", onCameraErrorButtonClick())
 
 	cameraTile := createCameraTile("camera-error")
 	cameraTile.Call("appendChild", h4)
@@ -51,4 +52,13 @@ func createCameraTile(id string) js.Value {
 	tile.Set("id", id)
 
 	return tile
+}
+
+func onCameraErrorButtonClick() js.Func {
+
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+
+		js.Global().Get("location").Call("reload")
+		return nil
+	})
 }

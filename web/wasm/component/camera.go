@@ -34,6 +34,7 @@ func createCameraError(title string, text string) js.Value {
 	p.Set("innerHTML", text)
 
 	button := js.Global().Get("document").Call("createElement", "cds-button")
+	button.Set("kind", "danger")
 	button.Set("innerHTML", util.CameraReloadPage())
 
 	cameraTile := createCameraTile("camera-error")

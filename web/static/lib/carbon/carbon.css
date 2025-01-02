@@ -28,6 +28,11 @@
 	overflow-y : auto;
 }
 
+#camera-error cds-button {
+	position : relative;
+	bottom   : var(--cds-spacing-05);
+}
+
 #camera-loading {
 	display         : flex;
 	justify-content : center;

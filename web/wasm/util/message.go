@@ -20,7 +20,7 @@ var (
 		Spanish: {
 			app:                          "DummyAI",
 			cameraErrorNotSupportedText:  "Verifique la configuración de su dispositivo",
-			cameraErrorNotSupportedTitle: "La cámara no es compatible",
+			cameraErrorNotSupportedTitle: "Cámara no soportada",
 			cameraLoading:                "Cargando...",
 			cameraReloadPage:             "Recargar página",
 		},

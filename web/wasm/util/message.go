@@ -2,6 +2,8 @@ package util
 
 const (
 	app = iota
+	cameraErrorNotSupportedText
+	cameraErrorNotSupportedTitle
 	cameraLoading
 	cameraReloadPage
 )
@@ -9,19 +11,25 @@ const (
 var (
 	allMessages = map[string]map[int]string{
 		English: {
-			app:              "DummyAI",
-			cameraLoading:    "Loading...",
-			cameraReloadPage: "Reload page",
+			app:                          "DummyAI",
+			cameraErrorNotSupportedText:  "",
+			cameraErrorNotSupportedTitle: "",
+			cameraLoading:                "Loading...",
+			cameraReloadPage:             "Reload page",
 		},
 		Spanish: {
-			app:              "DummyAI",
-			cameraLoading:    "Cargando...",
-			cameraReloadPage: "Recargar página",
+			app:                          "DummyAI",
+			cameraErrorNotSupportedText:  "",
+			cameraErrorNotSupportedTitle: "",
+			cameraLoading:                "Cargando...",
+			cameraReloadPage:             "Recargar página",
 		},
 		Portuguese: {
-			app:              "DummyAI",
-			cameraLoading:    "Carregando...",
-			cameraReloadPage: "Recarregar página",
+			app:                          "DummyAI",
+			cameraErrorNotSupportedText:  "",
+			cameraErrorNotSupportedTitle: "",
+			cameraLoading:                "Carregando...",
+			cameraReloadPage:             "Recarregar página",
 		},
 	}
 	messages = allMessages[language]
@@ -30,6 +38,16 @@ var (
 func App() string {
 
 	return messages[app]
+}
+
+func CameraErrorNotSupportedText() string {
+
+	return messages[cameraErrorNotSupportedText]
+}
+
+func CameraErrorNotSupportedTitle() string {
+
+	return messages[cameraErrorNotSupportedTitle]
 }
 
 func CameraLoading() string {

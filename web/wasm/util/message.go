@@ -12,8 +12,8 @@ var (
 	allMessages = map[string]map[int]string{
 		English: {
 			app:                          "DummyAI",
-			cameraErrorNotSupportedText:  "",
-			cameraErrorNotSupportedTitle: "",
+			cameraErrorNotSupportedText:  "Please check your device settings",
+			cameraErrorNotSupportedTitle: "Camera not supported",
 			cameraLoading:                "Loading...",
 			cameraReloadPage:             "Reload page",
 		},

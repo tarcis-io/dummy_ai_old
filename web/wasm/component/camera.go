@@ -59,6 +59,13 @@ func onCameraLoad() js.Func {
 
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 
+		getUserMedia := js.Global().Get("navigator").Get("mediaDevices?").Get("getUserMedia")
+
+		if getUserMedia.IsUndefined() {
+
+			return nil
+		}
+
 		return nil
 	})
 }

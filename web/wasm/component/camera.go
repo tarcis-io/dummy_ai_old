@@ -10,7 +10,7 @@ import (
 
 func CreateCamera() js.Value {
 
-	js.Global().Call("setTimeout", onCameraLoad(), 500)
+	js.Global().Call("setTimeout", onCameraLoad(), 1500)
 	return createCameraLoading()
 }
 

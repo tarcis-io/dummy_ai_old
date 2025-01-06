@@ -14,6 +14,22 @@ func CreateCamera() js.Value {
 
 	onLoad := js.FuncOf(func(this js.Value, args []js.Value) any {
 
+		mediaDevices := js.Global().Get("navigator").Get("mediaDevices")
+
+		if mediaDevices.IsUndefined() {
+
+			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
+			return nil
+		}
+
+		getUserMedia := mediaDevices.Get("getUserMedia")
+
+		if getUserMedia.IsUndefined() {
+
+			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
+			return nil
+		}
+
 		return nil
 	})
 	js.Global().Call("setTimeout", onLoad, 1500)
@@ -66,31 +82,4 @@ func createCameraTile(id string) js.Value {
 	tile.Set("id", id)
 
 	return tile
-}
-
-func onCameraLoad() js.Func {
-
-	return js.FuncOf(func(this js.Value, args []js.Value) any {
-
-		var (
-			cameraLoading = js.Global().Get("document").Call("getElementById", "camera-loading")
-			mediaDevices  = js.Global().Get("navigator").Get("mediaDevices")
-		)
-
-		if mediaDevices.IsUndefined() {
-
-			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
-			return nil
-		}
-
-		getUserMedia := mediaDevices.Get("getUserMedia")
-
-		if getUserMedia.IsUndefined() {
-
-			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
-			return nil
-		}
-
-		return nil
-	})
 }

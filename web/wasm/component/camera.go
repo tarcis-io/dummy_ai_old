@@ -58,6 +58,21 @@ func createCameraLoading() js.Value {
 	return cameraTile
 }
 
+func createCameraErrorNotSupported() js.Value {
+
+	return createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText())
+}
+
+func createCameraErrorNotAllowed() js.Value {
+
+	return createCameraError(util.CameraErrorNotAllowedTitle(), util.CameraErrorNotAllowedText())
+}
+
+func createCameraErrorNotFound() js.Value {
+
+	return createCameraError(util.CameraErrorNotFoundTitle(), util.CameraErrorNotFoundText())
+}
+
 func createCameraError(title string, text string) js.Value {
 
 	h4 := js.Global().Get("document").Call("createElement", "h4")

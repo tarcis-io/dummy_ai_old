@@ -38,6 +38,7 @@ func CreateCamera() js.Value {
 			return nil
 		})
 
+		mediaDevices.Call("getUserMedia", constraints).Call("then", onSuccess).Call("catch", onError)
 		return nil
 	})
 	js.Global().Call("setTimeout", onLoad, 1500)

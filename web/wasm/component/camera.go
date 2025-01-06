@@ -16,15 +16,7 @@ func CreateCamera() js.Value {
 
 		mediaDevices := js.Global().Get("navigator").Get("mediaDevices")
 
-		if mediaDevices.IsUndefined() {
-
-			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
-			return nil
-		}
-
-		getUserMedia := mediaDevices.Get("getUserMedia")
-
-		if getUserMedia.IsUndefined() {
+		if mediaDevices.IsUndefined() || mediaDevices.Get("getUserMedia").IsUndefined() {
 
 			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
 			return nil

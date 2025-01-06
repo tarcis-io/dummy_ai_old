@@ -26,6 +26,18 @@ func CreateCamera() js.Value {
 			"video": true,
 		})
 
+		onSuccess := js.FuncOf(func(this js.Value, args []js.Value) any {
+
+			js.Global().Get("console").Call("log", "success!")
+			return nil
+		})
+
+		onError := js.FuncOf(func(this js.Value, args []js.Value) any {
+
+			js.Global().Get("console").Call("log", "error!")
+			return nil
+		})
+
 		return nil
 	})
 	js.Global().Call("setTimeout", onLoad, 1500)

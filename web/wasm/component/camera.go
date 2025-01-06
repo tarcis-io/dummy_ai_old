@@ -30,6 +30,10 @@ func CreateCamera() js.Value {
 			return nil
 		}
 
+		constraints := js.ValueOf(map[string]any{
+			"video": true,
+		})
+
 		return nil
 	})
 	js.Global().Call("setTimeout", onLoad, 1500)

@@ -11,38 +11,6 @@ import (
 func CreateCamera() js.Value {
 
 	cameraLoading := createCameraLoading()
-
-	onLoad := js.FuncOf(func(this js.Value, args []js.Value) any {
-
-		mediaDevices := js.Global().Get("navigator").Get("mediaDevices")
-
-		if mediaDevices.IsUndefined() || mediaDevices.Get("getUserMedia").IsUndefined() {
-
-			cameraLoading.Call("replaceWith", createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText()))
-			return nil
-		}
-
-		constraints := js.ValueOf(map[string]any{
-			"video": true,
-		})
-
-		onSuccess := js.FuncOf(func(this js.Value, args []js.Value) any {
-
-			js.Global().Get("console").Call("log", "success!")
-			return nil
-		})
-
-		onError := js.FuncOf(func(this js.Value, args []js.Value) any {
-
-			js.Global().Get("console").Call("log", "error!")
-			return nil
-		})
-
-		mediaDevices.Call("getUserMedia", constraints).Call("then", onSuccess).Call("catch", onError)
-		return nil
-	})
-	js.Global().Call("setTimeout", onLoad, 1500)
-
 	return cameraLoading
 }
 

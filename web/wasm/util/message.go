@@ -18,7 +18,7 @@ var (
 			app:                          "DummyAI",
 			cameraErrorNotAllowedText:    "Please enable camera access in your device settings",
 			cameraErrorNotAllowedTitle:   "Camera not allowed",
-			cameraErrorNotFoundText:      "",
+			cameraErrorNotFoundText:      "Please check if your camera is connected and enabled",
 			cameraErrorNotFoundTitle:     "Camera not found",
 			cameraErrorNotSupportedText:  "Please check your device settings",
 			cameraErrorNotSupportedTitle: "Camera not supported",

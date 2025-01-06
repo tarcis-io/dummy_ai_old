@@ -16,11 +16,11 @@ var (
 	allMessages = map[string]map[int]string{
 		English: {
 			app:                          "DummyAI",
-			cameraErrorNotAllowedText:    "Enable camera access in your device settings",
+			cameraErrorNotAllowedText:    "Please enable camera access in your device settings",
 			cameraErrorNotAllowedTitle:   "Camera not allowed",
-			cameraErrorNotFoundText:      "Check if your camera is connected and enabled",
+			cameraErrorNotFoundText:      "Please check if your camera is connected and enabled",
 			cameraErrorNotFoundTitle:     "Camera not found",
-			cameraErrorNotSupportedText:  "Check your device settings",
+			cameraErrorNotSupportedText:  "Please check your device settings",
 			cameraErrorNotSupportedTitle: "Camera not supported",
 			cameraLoading:                "Loading...",
 			cameraReloadPage:             "Reload page",

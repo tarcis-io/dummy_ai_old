@@ -11,6 +11,12 @@ import (
 func CreateCamera() js.Value {
 
 	cameraLoading := createCameraLoading()
+
+	onLoad := js.FuncOf(func(this js.Value, args []js.Value) any {
+
+		return nil
+	})
+
 	return cameraLoading
 }
 

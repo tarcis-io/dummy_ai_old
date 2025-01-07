@@ -11,13 +11,6 @@ import (
 func CreateCamera() js.Value {
 
 	cameraLoading := createCameraLoading()
-
-	onLoad := js.FuncOf(func(this js.Value, args []js.Value) any {
-
-		return nil
-	})
-	js.Global().Call("setTimeout", onLoad, 1500)
-
 	return cameraLoading
 }
 
@@ -31,21 +24,6 @@ func createCameraLoading() js.Value {
 	cameraTile.Call("appendChild", loading)
 
 	return cameraTile
-}
-
-func createCameraErrorNotSupported() js.Value {
-
-	return createCameraError(util.CameraErrorNotSupportedTitle(), util.CameraErrorNotSupportedText())
-}
-
-func createCameraErrorNotAllowed() js.Value {
-
-	return createCameraError(util.CameraErrorNotAllowedTitle(), util.CameraErrorNotAllowedText())
-}
-
-func createCameraErrorNotFound() js.Value {
-
-	return createCameraError(util.CameraErrorNotFoundTitle(), util.CameraErrorNotFoundText())
 }
 
 func createCameraError(title string, text string) js.Value {

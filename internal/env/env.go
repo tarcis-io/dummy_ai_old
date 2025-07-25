@@ -5,29 +5,29 @@ import (
 )
 
 type (
-	env struct {
-		language      string
+	config struct {
+		languageCode  string
 		serverAddress string
 	}
 )
 
 var (
-	appEnv *env
+	appConfig *config
 )
 
 func init() {
-	appEnv = &env{
-		language:      lookupEnv("LANGUAGE", "en"),
+	appConfig = &config{
+		languageCode:  lookupEnv("LANGUAGE_CODE", "en"),
 		serverAddress: lookupEnv("SERVER_ADDRESS", ":8080"),
 	}
 }
 
-func Language() string {
-	return appEnv.language
+func LanguageCode() string {
+	return appConfig.languageCode
 }
 
 func ServerAddress() string {
-	return appEnv.serverAddress
+	return appConfig.serverAddress
 }
 
 func lookupEnv(key, defaultValue string) string {

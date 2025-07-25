@@ -4,17 +4,30 @@ import (
 	"os"
 )
 
-var (
-	language      = env("LANGUAGE", "en")
-	serverAddress = env("SERVER_ADDRESS", ":8080")
+type (
+	config struct {
+		language      string
+		serverAddress string
+	}
 )
 
+var (
+	envConfig *config
+)
+
+func init() {
+	envConfig = &config{
+		language:      env("LANGUAGE", "en"),
+		serverAddress: env("SERVER_ADDRESS", ":8080"),
+	}
+}
+
 func Language() string {
-	return language
+	return envConfig.language
 }
 
 func ServerAddress() string {
-	return serverAddress
+	return envConfig.serverAddress
 }
 
 func env(key, defaultValue string) string {

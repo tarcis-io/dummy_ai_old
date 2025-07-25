@@ -20,6 +20,7 @@ var (
 )
 
 func Run() {
+	http.Handle("/", http.FileServer(http.Dir("./static")))
 	err := http.ListenAndServe(env.ServerAddress(), nil)
 	if err != nil {
 		log.Fatalf("FATAL: Failed to start server: %v", err)

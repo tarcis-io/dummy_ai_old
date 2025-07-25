@@ -1,0 +1,29 @@
+# ----- Build Stage -----
+FROM golang:1.24 AS build
+WORKDIR /build
+
+RUN useradd -u 10001 dummy_ai
+
+COPY go.mod go.sum .
+RUN go mod download
+
+COPY cmd/dummy_ai/main.go cmd/dummy_ai/
+COPY internal/env/env.go internal/env/
+COPY internal/server/server.go internal/server/
+
+# Build the Go application
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o dummy_ai .cmd/dummy_ai/
+
+# ----- Application Stage -----
+FROM scratch AS app
+WORKDIR /app
+
+COPY --from=build /etc/passwd /etc/passwd
+USER dummy_ai
+
+COPY --chown=dummy_ai --from=build build/dummy_ai .
+COPY --chown=dummy_ai static/ static/
+
+EXPOSE 8080
+
+ENTRYPOINT ["./dummy_ai"]

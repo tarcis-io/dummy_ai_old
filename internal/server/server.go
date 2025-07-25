@@ -15,6 +15,10 @@ type (
 	}
 )
 
+func (s *Server) RegisterFileServer(urlPath, dir string) {
+	s.router.Handle(urlPath, http.StripPrefix(urlPath, http.FileServer(http.Dir(dir))))
+}
+
 func (s *Server) ListenAndServe() {
 	err := http.ListenAndServe(env.ServerAddress(), s.router)
 	if err != nil {
@@ -23,9 +27,8 @@ func (s *Server) ListenAndServe() {
 }
 
 func New() *Server {
-	router := http.NewServeMux()
 	return &Server{
-		router:       router,
+		router:       http.NewServeMux(),
 		httpTemplate: template.Must(template.ParseFiles("template.html")),
 	}
 }

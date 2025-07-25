@@ -9,6 +9,13 @@ import (
 )
 
 var (
+	wasmRoutes = map[string]string{
+		"/":      "/wasm/home.wasm",
+		"/about": "/wasm/about.wasm",
+	}
+	wasmPathError404 = "/wasm/error_404.wasm"
+	wasmPathError500 = "/wasm/error_500.wasm"
+
 	httpTemplate = template.Must(template.ParseFiles("template.html"))
 )
 

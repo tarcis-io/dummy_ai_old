@@ -5,6 +5,12 @@ import (
 	"text/template"
 )
 
+type (
+	pageData struct {
+		wasmPath string
+	}
+)
+
 var (
 	//go:embed template.html
 	htmlTemplateFS embed.FS

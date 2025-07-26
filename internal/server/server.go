@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"log"
 	"net/http"
 	"text/template"
 )
@@ -22,7 +23,9 @@ func Run() {
 }
 
 func listenAndServe(serverAddress string, router http.Handler) {
+	log.Printf("INFO: Server starting on %s", serverAddress)
 	err := http.ListenAndServe(serverAddress, router)
 	if err != nil {
+		log.Fatalf("FATAL: Failed to start server: %v", err)
 	}
 }

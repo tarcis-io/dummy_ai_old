@@ -26,10 +26,10 @@ func Run() {
 	listenAndServe(env.ServerAddress(), router)
 }
 
-func listenAndServe(serverAddress string, router http.Handler) {
-	log.Printf("INFO: Server starting on %s", serverAddress)
-	err := http.ListenAndServe(serverAddress, router)
+func listenAndServe(addr string, handler http.Handler) {
+	log.Printf("INFO: Server running on %s", addr)
+	err := http.ListenAndServe(addr, handler)
 	if err != nil {
-		log.Fatalf("FATAL: Failed to start server: %v", err)
+		log.Fatalf("FATAL: Failed to run server: %v", err)
 	}
 }

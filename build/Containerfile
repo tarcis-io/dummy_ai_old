@@ -12,7 +12,7 @@ COPY internal/env/env.go internal/env/
 COPY internal/server/server.go internal/server/
 
 # Build the Go application
-RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o dummy_ai .cmd/dummy_ai/
+RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o dummy_ai ./cmd/dummy_ai/
 
 # ----- Application Stage -----
 FROM scratch AS app

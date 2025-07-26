@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"net/http"
 	"text/template"
 )
 
@@ -18,4 +19,10 @@ var (
 )
 
 func Run() {
+}
+
+func listenAndServe(serverAddress string, router http.Handler) {
+	err := http.ListenAndServe(serverAddress, router)
+	if err != nil {
+	}
 }

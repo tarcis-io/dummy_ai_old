@@ -40,6 +40,7 @@ func requestHandler(w http.ResponseWriter, r *http.Request) {
 		renderPage(w, &page{
 			wasmPath: "/wasm/home.wasm",
 		})
+		return
 	}
 	staticFileServer.ServeHTTP(w, r)
 }

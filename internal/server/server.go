@@ -26,6 +26,14 @@ func Run() {
 	listenAndServe(env.ServerAddress(), router)
 }
 
+func renderPage(w http.ResponseWriter, p *pageData) {
+	err := htmlTemplate.Execute(w, p)
+	if err != nil {
+		log.Printf("ERROR: Failed to render page %s: %v", p.wasmPath, err)
+		http.Error(w, "500 internal server error", http.StatusInternalServerError)
+	}
+}
+
 func listenAndServe(addr string, handler http.Handler) {
 	log.Printf("INFO: Server running on %s", addr)
 	err := http.ListenAndServe(addr, handler)

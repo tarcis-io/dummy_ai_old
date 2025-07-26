@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+
+	"dummy_ai/internal/env"
 )
 
 type (
@@ -20,6 +22,8 @@ var (
 )
 
 func Run() {
+	router := http.NewServeMux()
+	listenAndServe(env.ServerAddress(), router)
 }
 
 func listenAndServe(serverAddress string, router http.Handler) {

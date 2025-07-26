@@ -19,11 +19,17 @@ var (
 	//go:embed template.html
 	htmlTemplateFS embed.FS
 	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
+
+	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
 func Run() {
 	router := http.NewServeMux()
 	listenAndServe(env.ServerAddress(), router)
+}
+
+func serveStaticFiles(w http.ResponseWriter, r *http.Request) {
+	staticFileServer.ServeHTTP(w, r)
 }
 
 func renderPage(w http.ResponseWriter, p *pageData) {

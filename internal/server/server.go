@@ -9,6 +9,7 @@ import (
 
 func Run() {
 	router := http.NewServeMux()
+	router.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("./static"))))
 	serverAddress := env.ServerAddress()
 	log.Printf("INFO: Server starting on %s", serverAddress)
 	err := http.ListenAndServe(serverAddress, router)

@@ -1,10 +1,18 @@
 package server
 
 import (
+	"embed"
 	"log"
 	"net/http"
+	"text/template"
 
 	"dummy_ai/internal/env"
+)
+
+var (
+	//go:embed template.html
+	httpTemplateFS embed.FS
+	httpTemplate   = template.Must(template.ParseFS(httpTemplateFS, "template.html"))
 )
 
 func Run() {

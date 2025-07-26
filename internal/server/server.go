@@ -1,6 +1,7 @@
 package server
 
 import (
+	"embed"
 	"log"
 	"net/http"
 	"text/template"
@@ -16,7 +17,9 @@ var (
 	wasmPathError404 = "/wasm/error_404.wasm"
 	wasmPathError500 = "/wasm/error_500.wasm"
 
-	httpTemplate = template.Must(template.ParseFiles("template.html"))
+	//go:embed template.html
+	httpTemplateFS embed.FS
+	httpTemplate   = template.Must(template.ParseFS(httpTemplateFS, "template.html"))
 )
 
 func Run() {

@@ -23,12 +23,12 @@ var (
 
 func Run() {
 	router := http.NewServeMux()
-	router.Handle("/", http.FileServer(http.Dir("./static")))
 	router.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		renderPage(w, &page{
 			wasmPath: "/wasm/home.wasm",
 		})
 	})
+	router.Handle("/", http.FileServer(http.Dir("./static")))
 	serverAddress := env.ServerAddress()
 	log.Printf("INFO: Server starting on %s", serverAddress)
 	err := http.ListenAndServe(serverAddress, router)

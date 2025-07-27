@@ -36,6 +36,15 @@ var (
 func Run() {
 }
 
+func handleRequest(w http.ResponseWriter, r *http.Request) {
+	p, ok := pageRoutes[r.URL.Path]
+	if ok {
+		renderPage(w, p)
+		return
+	}
+	serveStaticFile(w, r)
+}
+
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := htmlTemplate.Execute(w, p)
 	if err != nil {

@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"log"
 	"net/http"
 	"text/template"
 )
@@ -33,4 +34,12 @@ var (
 )
 
 func Run() {
+}
+
+func listenAndServe(addr string, handler http.Handler) {
+	log.Printf("INFO: Server is running on %s", addr)
+	err := http.ListenAndServe(addr, handler)
+	if err != nil {
+		log.Fatalf("FATAL: Failed to run server: %v", err)
+	}
 }

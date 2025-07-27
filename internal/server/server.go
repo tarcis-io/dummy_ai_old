@@ -25,7 +25,17 @@ var (
 
 func Run() {
 	router := http.NewServeMux()
+	router.HandleFunc("/", handleRequest)
 	listenAndServe(env.ServerAddress(), router)
+}
+
+func handleRequest(w http.ResponseWriter, r *http.Request) {
+	requestPath := r.URL.Path
+	if requestPath == "/" {
+		renderPage(w, &pageData{})
+		return
+	}
+	serveStaticFile(w, r)
 }
 
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {

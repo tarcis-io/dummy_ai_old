@@ -32,7 +32,8 @@ var (
 	htmlTemplateFS embed.FS
 	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
 
-	staticFileServer = http.FileServer(http.Dir("./static"))
+	staticFileServerDir = http.Dir("./static")
+	staticFileServer    = http.FileServer(staticFileServerDir)
 )
 
 func Run() {

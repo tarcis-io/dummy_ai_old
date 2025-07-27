@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 	"text/template"
+
+	"dummy_ai/internal/env"
 )
 
 type (
@@ -34,6 +36,9 @@ var (
 )
 
 func Run() {
+	router := http.NewServeMux()
+	router.HandleFunc("/", handleRequest)
+	listenAndServe(env.ServerAddress(), router)
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {

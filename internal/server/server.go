@@ -2,6 +2,7 @@ package server
 
 import (
 	"embed"
+	"net/http"
 	"text/template"
 )
 
@@ -27,6 +28,8 @@ var (
 	//go:embed template.html
 	htmlTemplateFS embed.FS
 	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
+
+	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
 func Run() {

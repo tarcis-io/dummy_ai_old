@@ -21,6 +21,8 @@ var (
 	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
 
 	staticFileServer = http.FileServer(http.Dir("./static"))
+
+	pageRoutes = map[string]*pageData{}
 )
 
 func Run() {
@@ -31,8 +33,9 @@ func Run() {
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	requestPath := r.URL.Path
-	if requestPath == "/" {
-		renderPage(w, &pageData{})
+	pageData, ok := pageRoutes[requestPath]
+	if ok {
+		renderPage(w, pageData)
 		return
 	}
 	serveStaticFile(w, r)

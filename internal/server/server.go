@@ -32,10 +32,9 @@ func Run() {
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-	requestPath := r.URL.Path
-	pageData, ok := pageRoutes[requestPath]
+	p, ok := pageRoutes[r.URL.Path]
 	if ok {
-		renderPage(w, pageData)
+		renderPage(w, p)
 		return
 	}
 	serveStaticFile(w, r)

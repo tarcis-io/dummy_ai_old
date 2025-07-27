@@ -28,7 +28,7 @@ func Run() {
 	listenAndServe(env.ServerAddress(), router)
 }
 
-func serveStaticFiles(w http.ResponseWriter, r *http.Request) {
+func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 	staticFileServer.ServeHTTP(w, r)
 }
 

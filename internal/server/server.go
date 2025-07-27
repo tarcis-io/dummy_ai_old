@@ -36,6 +36,18 @@ var (
 func Run() {
 }
 
+func renderPage(w http.ResponseWriter, p *pageData) {
+	err := htmlTemplate.Execute(w, p)
+	if err != nil {
+		log.Printf("ERROR: Failed to render page %s: %v", p.wasmPath, err)
+		http.Error(w, "500 internal server error", http.StatusInternalServerError)
+	}
+}
+
+func serveStaticFile(w http.ResponseWriter, r *http.Request) {
+	staticFileServer.ServeHTTP(w, r)
+}
+
 func listenAndServe(addr string, handler http.Handler) {
 	log.Printf("INFO: Server is running on %s", addr)
 	err := http.ListenAndServe(addr, handler)

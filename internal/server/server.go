@@ -74,6 +74,7 @@ func renderPageError(w http.ResponseWriter, statusCode int) {
 }
 
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Cache-Control", "public, max-age=86400")
 	staticFileServer.ServeHTTP(w, r)
 }
 

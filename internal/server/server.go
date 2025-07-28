@@ -43,6 +43,10 @@ func Run() {
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodGet {
+		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
+		return
+	}
 	p := r.URL.Path
 	d, ok := pageRoutes[p]
 	if ok {

@@ -45,3 +45,11 @@ func GetGlobal() *DOM {
 		jsObject: js.Global(),
 	}
 }
+
+func unwrapValue(value any) any {
+	d, ok := value.(*DOM)
+	if ok {
+		return d.jsObject
+	}
+	return value
+}

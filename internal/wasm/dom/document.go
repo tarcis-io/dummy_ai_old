@@ -6,8 +6,8 @@ type (
 	}
 )
 
-func (d *Document) CreateElement(element string) *DOM {
-	return d.Call("createElement", element)
+func (d *Document) CreateElement(tagName string) *DOM {
+	return d.Call("createElement", tagName)
 }
 
 func GetDocument() *Document {

@@ -41,9 +41,9 @@ func (d *DOM) Set(property string, value any) {
 	d.jsObject.Set(property, unwrapValue(value))
 }
 
-func (d *DOM) Call(method string, arguments ...any) *DOM {
+func (d *DOM) Call(method string, args ...any) *DOM {
 	return &DOM{
-		jsObject: d.jsObject.Call(method, unwrapValues(arguments)...),
+		jsObject: d.jsObject.Call(method, unwrapValues(args)...),
 	}
 }
 
@@ -78,9 +78,9 @@ func GetGlobal() *DOM {
 }
 
 func unwrapValue(value any) any {
-	d, ok := value.(*DOM)
+	v, ok := value.(*DOM)
 	if ok {
-		return d.jsObject
+		return v.jsObject
 	}
 	return value
 }

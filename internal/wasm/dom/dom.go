@@ -53,3 +53,11 @@ func unwrapValue(value any) any {
 	}
 	return value
 }
+
+func unwrapValues(values []any) []any {
+	unwrappedValues := make([]any, len(values))
+	for i, v := range values {
+		unwrappedValues[i] = unwrapValue(v)
+	}
+	return unwrappedValues
+}

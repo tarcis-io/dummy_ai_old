@@ -51,7 +51,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	_, err := staticFileServerDir.Open(p)
 	if err != nil {
-		http.Error(w, "404 not found", http.StatusNotFound)
+		http.Error(w, "404 page not found", http.StatusNotFound)
 		return
 	}
 	serveStaticFile(w, r)

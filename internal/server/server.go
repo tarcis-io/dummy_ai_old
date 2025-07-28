@@ -32,8 +32,7 @@ var (
 	htmlTemplateFS embed.FS
 	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
 
-	staticFileServerDir = http.Dir("./static")
-	staticFileServer    = http.FileServer(staticFileServerDir)
+	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
 func Run() {
@@ -45,18 +44,12 @@ func Run() {
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		log.Printf("ERROR: Method not allowed: %s", r.Method)
-		renderPageError(w, http.StatusMethodNotAllowed)
+		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
 	p, ok := pageRoutes[r.URL.Path]
 	if ok {
 		renderPage(w, p)
-		return
-	}
-	_, err := staticFileServerDir.Open(r.URL.Path)
-	if err != nil {
-		log.Printf("ERROR: Not found: %s", r.URL.Path)
-		renderPageError(w, http.StatusNotFound)
 		return
 	}
 	serveStaticFile(w, r)
@@ -66,12 +59,8 @@ func renderPage(w http.ResponseWriter, p *pageData) {
 	err := htmlTemplate.Execute(w, p)
 	if err != nil {
 		log.Printf("ERROR: Failed to render page %s: %v", p.wasmPath, err)
-		renderPageError(w, http.StatusInternalServerError)
+		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
-}
-
-func renderPageError(w http.ResponseWriter, statusCode int) {
-	http.Error(w, http.StatusText(statusCode), statusCode)
 }
 
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {

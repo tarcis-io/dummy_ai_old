@@ -40,6 +40,12 @@ func (d *DOM) Set(property string, value any) {
 	d.jsObject.Set(property, value)
 }
 
+func (d *DOM) Call(method string, arguments ...any) *DOM {
+	return &DOM{
+		jsObject: d.jsObject.Call(method, unwrapValues(arguments)...),
+	}
+}
+
 func GetGlobal() *DOM {
 	return &DOM{
 		jsObject: js.Global(),

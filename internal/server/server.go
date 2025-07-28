@@ -11,20 +11,20 @@ import (
 
 type (
 	pageData struct {
-		title    string
-		wasmPath string
+		Title    string
+		WASMPath string
 	}
 )
 
 var (
 	pageRoutes = map[string]*pageData{
 		"/": {
-			title:    "DummyAI",
-			wasmPath: "/wasm/home.wasm",
+			Title:    "DummyAI",
+			WASMPath: "/wasm/home.wasm",
 		},
 		"/about": {
-			title:    "DummyAI",
-			wasmPath: "/wasm/about.wasm",
+			Title:    "DummyAI",
+			WASMPath: "/wasm/about.wasm",
 		},
 	}
 
@@ -58,7 +58,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := htmlTemplate.Execute(w, p)
 	if err != nil {
-		log.Printf("ERROR: Failed to render page %s: %v", p.wasmPath, err)
+		log.Printf("ERROR: Failed to render page %s: %v", p.WASMPath, err)
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 }

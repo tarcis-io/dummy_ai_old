@@ -7,43 +7,43 @@ import (
 
 type (
 	DOM struct {
-		jsObject js.Value
+		jsValue js.Value
 	}
 )
 
 func (d *DOM) Bool() bool {
-	return d.jsObject.Bool()
+	return d.jsValue.Bool()
 }
 
 func (d *DOM) String() string {
-	return d.jsObject.String()
+	return d.jsValue.String()
 }
 
 func (d *DOM) Int() int {
-	return d.jsObject.Int()
+	return d.jsValue.Int()
 }
 
 func (d *DOM) Float() float64 {
-	return d.jsObject.Float()
+	return d.jsValue.Float()
 }
 
 func (d *DOM) Truthy() bool {
-	return d.jsObject.Truthy()
+	return d.jsValue.Truthy()
 }
 
 func (d *DOM) Get(property string) *DOM {
 	return &DOM{
-		jsObject: d.jsObject.Get(property),
+		jsValue: d.jsValue.Get(property),
 	}
 }
 
 func (d *DOM) Set(property string, value any) {
-	d.jsObject.Set(property, unwrapValue(value))
+	d.jsValue.Set(property, unwrapValue(value))
 }
 
 func (d *DOM) Call(method string, args ...any) *DOM {
 	return &DOM{
-		jsObject: d.jsObject.Call(method, unwrapValues(args)...),
+		jsValue: d.jsValue.Call(method, unwrapValues(args)...),
 	}
 }
 
@@ -52,7 +52,7 @@ func (d *DOM) Await() (*DOM, error) {
 	defer close(v)
 	onResolve := js.FuncOf(func(this js.Value, args []js.Value) any {
 		v <- &DOM{
-			jsObject: args[0],
+			jsValue: args[0],
 		}
 		return nil
 	})
@@ -73,14 +73,14 @@ func (d *DOM) Await() (*DOM, error) {
 
 func GetGlobal() *DOM {
 	return &DOM{
-		jsObject: js.Global(),
+		jsValue: js.Global(),
 	}
 }
 
 func unwrapValue(value any) any {
 	v, ok := value.(*DOM)
 	if ok {
-		return v.jsObject
+		return v.jsValue
 	}
 	return value
 }

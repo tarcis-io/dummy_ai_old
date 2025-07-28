@@ -30,8 +30,8 @@ func (d *DOM) Truthy() bool {
 	return d.jsObject.Truthy()
 }
 
-func GetGlobal() DOM {
-	return DOM{
+func GetGlobal() *DOM {
+	return &DOM{
 		jsObject: js.Global(),
 	}
 }

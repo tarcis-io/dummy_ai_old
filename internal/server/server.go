@@ -44,7 +44,7 @@ func Run() {
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
+		renderPageError(w, http.StatusMethodNotAllowed)
 		return
 	}
 	p := r.URL.Path
@@ -55,7 +55,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	}
 	_, err := staticFileServerDir.Open(p)
 	if err != nil {
-		http.Error(w, "404 page not found", http.StatusNotFound)
+		renderPageError(w, http.StatusNotFound)
 		return
 	}
 	serveStaticFile(w, r)
@@ -65,8 +65,12 @@ func renderPage(w http.ResponseWriter, p *pageData) {
 	err := htmlTemplate.Execute(w, p)
 	if err != nil {
 		log.Printf("ERROR: Failed to render page %s: %v", p.wasmPath, err)
-		http.Error(w, "500 internal server error", http.StatusInternalServerError)
+		renderPageError(w, http.StatusInternalServerError)
 	}
+}
+
+func renderPageError(w http.ResponseWriter, statusCode int) {
+	http.Error(w, http.StatusText(statusCode), statusCode)
 }
 
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {

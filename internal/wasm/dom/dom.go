@@ -37,7 +37,7 @@ func (d *DOM) Get(property string) *DOM {
 }
 
 func (d *DOM) Set(property string, value any) {
-	d.jsObject.Set(property, value)
+	d.jsObject.Set(property, unwrapValue(value))
 }
 
 func (d *DOM) Call(method string, arguments ...any) *DOM {

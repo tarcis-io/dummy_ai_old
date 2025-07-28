@@ -44,17 +44,18 @@ func Run() {
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
+		log.Printf("ERROR: Method not allowed: %s", r.Method)
 		renderPageError(w, http.StatusMethodNotAllowed)
 		return
 	}
-	p := r.URL.Path
-	d, ok := pageRoutes[p]
+	p, ok := pageRoutes[r.URL.Path]
 	if ok {
-		renderPage(w, d)
+		renderPage(w, p)
 		return
 	}
-	_, err := staticFileServerDir.Open(p)
+	_, err := staticFileServerDir.Open(r.URL.Path)
 	if err != nil {
+		log.Printf("ERROR: Not found: %s", r.URL.Path)
 		renderPageError(w, http.StatusNotFound)
 		return
 	}

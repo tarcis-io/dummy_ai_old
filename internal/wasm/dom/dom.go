@@ -30,6 +30,16 @@ func (d *DOM) Truthy() bool {
 	return d.jsObject.Truthy()
 }
 
+func (d *DOM) Get(property string) *DOM {
+	return &DOM{
+		jsObject: d.jsObject.Get(property),
+	}
+}
+
+func (d *DOM) Set(property string, value any) {
+	d.jsObject.Set(property, value)
+}
+
 func GetGlobal() *DOM {
 	return &DOM{
 		jsObject: js.Global(),

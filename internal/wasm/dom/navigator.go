@@ -6,6 +6,12 @@ type (
 	}
 )
 
+func (n *Navigator) MediaDevices() *MediaDevices {
+	return &MediaDevices{
+		DOM: n.Get("mediaDevices"),
+	}
+}
+
 func (n *Navigator) Language() (string, bool) {
 	l := n.Get("language")
 	if l.Truthy() {

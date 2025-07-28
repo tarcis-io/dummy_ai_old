@@ -43,9 +43,15 @@ func Run() {
 }
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
-	p, ok := pageRoutes[r.URL.Path]
+	p := r.URL.Path
+	d, ok := pageRoutes[p]
 	if ok {
-		renderPage(w, p)
+		renderPage(w, d)
+		return
+	}
+	_, err := staticFileServerDir.Open(p)
+	if err != nil {
+		http.Error(w, "404 not found", http.StatusNotFound)
 		return
 	}
 	serveStaticFile(w, r)

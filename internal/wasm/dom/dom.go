@@ -1,6 +1,7 @@
 package dom
 
 import (
+	"errors"
 	"syscall/js"
 )
 
@@ -43,6 +44,30 @@ func (d *DOM) Set(property string, value any) {
 func (d *DOM) Call(method string, arguments ...any) *DOM {
 	return &DOM{
 		jsObject: d.jsObject.Call(method, unwrapValues(arguments)...),
+	}
+}
+
+func (d *DOM) Await() (*DOM, error) {
+	v := make(chan *DOM)
+	defer close(v)
+	onResolve := js.FuncOf(func(this js.Value, args []js.Value) any {
+		v <- &DOM{
+			jsObject: args[0],
+		}
+		return nil
+	})
+	err := make(chan error)
+	defer close(err)
+	onReject := js.FuncOf(func(this js.Value, args []js.Value) any {
+		err <- errors.New(args[0].String())
+		return nil
+	})
+	d.Call("then", onResolve, onReject)
+	select {
+	case v := <-v:
+		return v, nil
+	case err := <-err:
+		return nil, err
 	}
 }
 

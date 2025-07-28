@@ -18,6 +18,12 @@ func (w *Window) LocalStorage() *LocalStorage {
 	}
 }
 
+func (w *Window) Navigator() *Navigator {
+	return &Navigator{
+		DOM: w.Get("navigator"),
+	}
+}
+
 func GetWindow() *Window {
 	return &Window{
 		DOM: GetGlobal(),

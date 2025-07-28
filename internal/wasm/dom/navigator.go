@@ -13,9 +13,9 @@ func (n *Navigator) MediaDevices() *MediaDevices {
 }
 
 func (n *Navigator) Language() (string, bool) {
-	l := n.Get("language")
-	if l.Truthy() {
-		return l.String(), true
+	v := n.Get("language")
+	if v.Truthy() {
+		return v.String(), true
 	}
 	return "", false
 }

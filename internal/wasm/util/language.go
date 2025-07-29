@@ -29,3 +29,15 @@ var (
 		name: "Português",
 	}
 )
+
+func English() *Language {
+	return english
+}
+
+func Spanish() *Language {
+	return spanish
+}
+
+func Portuguese() *Language {
+	return portuguese
+}

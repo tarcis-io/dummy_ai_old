@@ -1,6 +1,8 @@
 package util
 
 import (
+	"strings"
+
 	"dummy_ai/internal/wasm/dom"
 )
 
@@ -71,6 +73,14 @@ func lookupLocalStorageLanguage() (*Language, bool) {
 	v, ok := dom.GetLocalStorage().GetItem("language")
 	if ok {
 		return LookupLanguage(v)
+	}
+	return nil, false
+}
+
+func lookupNavigatorLanguage() (*Language, bool) {
+	v, ok := dom.GetNavigator().Language()
+	if ok {
+		return LookupLanguage(strings.SplitN(v, "-", 2)[0])
 	}
 	return nil, false
 }

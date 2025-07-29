@@ -23,7 +23,7 @@ func (l *Language) Name() string {
 }
 
 var (
-	language *Language
+	currentLanguage *Language
 
 	english = &Language{
 		code: "en",
@@ -54,7 +54,7 @@ var (
 )
 
 func init() {
-	language = LookupLanguage()
+	currentLanguage = LookupLanguage()
 }
 
 func English() *Language {
@@ -73,11 +73,12 @@ func Languages() []*Language {
 	return languages
 }
 
-func GetLanguage() *Language {
-	return language
+func CurrentLanguage() *Language {
+	return currentLanguage
 }
 
 func SetLanguage(language *Language) {
+	currentLanguage = language
 	dom.GetLocalStorage().SetItem("language", language.code)
 }
 
@@ -97,8 +98,8 @@ func LookupLanguage() *Language {
 	return fallbackLanguage
 }
 
-func lookupLanguage(code string) (*Language, bool) {
-	v, ok := languageMap[code]
+func lookupLanguage(languageCode string) (*Language, bool) {
+	v, ok := languageMap[languageCode]
 	return v, ok
 }
 

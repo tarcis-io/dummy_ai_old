@@ -67,13 +67,29 @@ func Languages() []*Language {
 	return languages
 }
 
-func LookupLanguage(code string) (*Language, bool) {
-	v, ok := languageMap[code]
-	return v, ok
+func GetLanguage() *Language {
+	v, ok := lookupLocalStorageLanguage()
+	if ok {
+		return v
+	}
+	v, ok = lookupNavigatorLanguage()
+	if ok {
+		return v
+	}
+	v, ok = lookupEnvLanguage()
+	if ok {
+		return v
+	}
+	return fallbackLanguage
 }
 
 func SetLanguage(language *Language) {
 	dom.GetLocalStorage().SetItem("language", language.code)
+}
+
+func LookupLanguage(code string) (*Language, bool) {
+	v, ok := languageMap[code]
+	return v, ok
 }
 
 func lookupLocalStorageLanguage() (*Language, bool) {

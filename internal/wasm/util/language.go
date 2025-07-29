@@ -47,6 +47,8 @@ var (
 		spanish.code:    spanish,
 		portuguese.code: portuguese,
 	}
+
+	fallbackLanguage = english
 )
 
 func English() *Language {
@@ -68,6 +70,10 @@ func Languages() []*Language {
 func LookupLanguage(code string) (*Language, bool) {
 	v, ok := languageMap[code]
 	return v, ok
+}
+
+func SetLanguage(language *Language) {
+	dom.GetLocalStorage().SetItem("language", language.code)
 }
 
 func lookupLocalStorageLanguage() (*Language, bool) {

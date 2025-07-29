@@ -28,6 +28,18 @@ var (
 		code: "pt",
 		name: "Português",
 	}
+
+	languages = []*Language{
+		english,
+		spanish,
+		portuguese,
+	}
+
+	languageMap = map[string]*Language{
+		english.code:    english,
+		spanish.code:    spanish,
+		portuguese.code: portuguese,
+	}
 )
 
 func English() *Language {
@@ -40,4 +52,8 @@ func Spanish() *Language {
 
 func Portuguese() *Language {
 	return portuguese
+}
+
+func Languages() []*Language {
+	return languages
 }

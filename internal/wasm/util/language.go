@@ -3,6 +3,7 @@ package util
 import (
 	"strings"
 
+	"dummy_ai/internal/env"
 	"dummy_ai/internal/wasm/dom"
 )
 
@@ -83,4 +84,8 @@ func lookupNavigatorLanguage() (*Language, bool) {
 		return LookupLanguage(strings.SplitN(v, "-", 2)[0])
 	}
 	return nil, false
+}
+
+func lookupEnvLanguage() (*Language, bool) {
+	return LookupLanguage(env.LanguageCode())
 }

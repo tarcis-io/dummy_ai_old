@@ -57,3 +57,8 @@ func Portuguese() *Language {
 func Languages() []*Language {
 	return languages
 }
+
+func LookupLanguage(code string) (*Language, bool) {
+	v, ok := languageMap[code]
+	return v, ok
+}

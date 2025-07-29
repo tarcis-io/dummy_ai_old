@@ -38,13 +38,13 @@ var (
 		name: "Português",
 	}
 
-	languages = []*Language{
+	supportedLanguages = []*Language{
 		english,
 		spanish,
 		portuguese,
 	}
 
-	languageMap = map[string]*Language{
+	supportedLanguagesMap = map[string]*Language{
 		english.code:    english,
 		spanish.code:    spanish,
 		portuguese.code: portuguese,
@@ -69,8 +69,8 @@ func Portuguese() *Language {
 	return portuguese
 }
 
-func Languages() []*Language {
-	return languages
+func SupportedLanguages() []*Language {
+	return supportedLanguages
 }
 
 func CurrentLanguage() *Language {
@@ -99,7 +99,7 @@ func LookupLanguage() *Language {
 }
 
 func lookupLanguage(languageCode string) (*Language, bool) {
-	v, ok := languageMap[languageCode]
+	v, ok := supportedLanguagesMap[languageCode]
 	return v, ok
 }
 

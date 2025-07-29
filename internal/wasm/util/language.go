@@ -23,6 +23,8 @@ func (l *Language) Name() string {
 }
 
 var (
+	language *Language
+
 	english = &Language{
 		code: "en",
 		name: "English",
@@ -51,6 +53,10 @@ var (
 	fallbackLanguage = english
 )
 
+func init() {
+	language = LookupLanguage()
+}
+
 func English() *Language {
 	return english
 }
@@ -68,6 +74,14 @@ func Languages() []*Language {
 }
 
 func GetLanguage() *Language {
+	return language
+}
+
+func SetLanguage(language *Language) {
+	dom.GetLocalStorage().SetItem("language", language.code)
+}
+
+func LookupLanguage() *Language {
 	v, ok := lookupLocalStorageLanguage()
 	if ok {
 		return v
@@ -83,11 +97,7 @@ func GetLanguage() *Language {
 	return fallbackLanguage
 }
 
-func SetLanguage(language *Language) {
-	dom.GetLocalStorage().SetItem("language", language.code)
-}
-
-func LookupLanguage(code string) (*Language, bool) {
+func lookupLanguage(code string) (*Language, bool) {
 	v, ok := languageMap[code]
 	return v, ok
 }
@@ -95,7 +105,7 @@ func LookupLanguage(code string) (*Language, bool) {
 func lookupLocalStorageLanguage() (*Language, bool) {
 	v, ok := dom.GetLocalStorage().GetItem("language")
 	if ok {
-		return LookupLanguage(v)
+		return lookupLanguage(v)
 	}
 	return nil, false
 }
@@ -103,11 +113,11 @@ func lookupLocalStorageLanguage() (*Language, bool) {
 func lookupNavigatorLanguage() (*Language, bool) {
 	v, ok := dom.GetNavigator().Language()
 	if ok {
-		return LookupLanguage(strings.SplitN(v, "-", 2)[0])
+		return lookupLanguage(strings.SplitN(v, "-", 2)[0])
 	}
 	return nil, false
 }
 
 func lookupEnvLanguage() (*Language, bool) {
-	return LookupLanguage(env.LanguageCode())
+	return lookupLanguage(env.LanguageCode())
 }

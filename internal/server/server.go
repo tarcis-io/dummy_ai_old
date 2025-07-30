@@ -43,7 +43,7 @@ func Run() {
 
 func handleRequest(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
-		log.Printf("ERROR: Method not allowed: %s", r.Method)
+		log.Printf("[error] Method not allowed: %s", r.Method)
 		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
@@ -58,7 +58,7 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := htmlTemplate.Execute(w, p)
 	if err != nil {
-		log.Printf("ERROR: Failed to render page %s: %v", p.WASMPath, err)
+		log.Printf("[error] Failed to render page %s: %v", p.WASMPath, err)
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 }
@@ -69,9 +69,9 @@ func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 }
 
 func listenAndServe(addr string, handler http.Handler) {
-	log.Printf("INFO: Server is running on %s", addr)
+	log.Printf("[info] Server is running on %s", addr)
 	err := http.ListenAndServe(addr, handler)
 	if err != nil {
-		log.Fatalf("FATAL: Failed to run server: %v", err)
+		log.Fatalf("[fatal] Failed to run server: %v", err)
 	}
 }

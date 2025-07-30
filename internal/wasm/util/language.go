@@ -23,8 +23,6 @@ func (l *Language) Name() string {
 }
 
 var (
-	currentLanguage *Language
-
 	english = &Language{
 		code: "en",
 		name: "English",
@@ -44,6 +42,8 @@ var (
 		portuguese,
 	}
 
+	currentLanguage = LookupLanguage()
+
 	supportedLanguagesMap = map[string]*Language{
 		english.code:    english,
 		spanish.code:    spanish,
@@ -52,10 +52,6 @@ var (
 
 	fallbackLanguage = english
 )
-
-func init() {
-	currentLanguage = LookupLanguage()
-}
 
 func English() *Language {
 	return english

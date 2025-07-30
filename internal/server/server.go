@@ -10,14 +10,14 @@ import (
 )
 
 type (
-	pageData struct {
+	templateData struct {
 		Title    string
 		WASMPath string
 	}
 )
 
 var (
-	pageRoutes = map[string]*pageData{
+	pageRoutes = map[string]*templateData{
 		"/": {
 			Title:    "DummyAI",
 			WASMPath: "/wasm/home.wasm",
@@ -55,10 +55,10 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	serveStaticFile(w, r)
 }
 
-func renderPage(w http.ResponseWriter, p *pageData) {
-	err := htmlTemplate.Execute(w, p)
+func renderPage(w http.ResponseWriter, t *templateData) {
+	err := htmlTemplate.Execute(w, t)
 	if err != nil {
-		log.Printf("[error] Failed to render page %s: %v", p.WASMPath, err)
+		log.Printf("[error] Failed to render page %s: %v", t.WASMPath, err)
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 }

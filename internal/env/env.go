@@ -28,8 +28,8 @@ func ServerAddress() string {
 
 func lookupEnv(key, defaultValue string) string {
 	v, ok := os.LookupEnv(key)
-	if !ok {
-		return defaultValue
+	if ok {
+		return v
 	}
-	return v
+	return defaultValue
 }

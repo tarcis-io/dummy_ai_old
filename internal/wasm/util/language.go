@@ -94,11 +94,6 @@ func LookupLanguage() *Language {
 	return fallbackLanguage
 }
 
-func lookupLanguage(languageCode string) (*Language, bool) {
-	v, ok := supportedLanguagesMap[languageCode]
-	return v, ok
-}
-
 func lookupLocalStorageLanguage() (*Language, bool) {
 	v, ok := dom.GetLocalStorage().GetItem("language")
 	if ok {
@@ -117,4 +112,9 @@ func lookupNavigatorLanguage() (*Language, bool) {
 
 func lookupEnvLanguage() (*Language, bool) {
 	return lookupLanguage(env.LanguageCode())
+}
+
+func lookupLanguage(languageCode string) (*Language, bool) {
+	v, ok := supportedLanguagesMap[languageCode]
+	return v, ok
 }

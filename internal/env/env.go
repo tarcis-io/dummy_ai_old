@@ -12,18 +12,18 @@ type (
 )
 
 var (
-	appConfig = &config{
+	configMap = &config{
 		languageCode:  lookupEnv("LANGUAGE_CODE", "en"),
 		serverAddress: lookupEnv("SERVER_ADDRESS", ":8080"),
 	}
 )
 
 func LanguageCode() string {
-	return appConfig.languageCode
+	return configMap.languageCode
 }
 
 func ServerAddress() string {
-	return appConfig.serverAddress
+	return configMap.serverAddress
 }
 
 func lookupEnv(key, defaultValue string) string {

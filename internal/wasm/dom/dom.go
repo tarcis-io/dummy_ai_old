@@ -1,6 +1,7 @@
 package dom
 
 import (
+	"errors"
 	"syscall/js"
 )
 
@@ -47,7 +48,19 @@ func (d *DOM) Call(method string, args ...any) *DOM {
 }
 
 func (d *DOM) Await() (*DOM, error) {
-	return nil, nil
+	v := make(chan *DOM)
+	e := make(chan error)
+	onFulfilled := onFulfilledCallback(v)
+	defer onFulfilled.Release()
+	onRejected := onRejectedCallback(e)
+	defer onRejected.Release()
+	d.Call("then", onFulfilled, onRejected)
+	select {
+	case value := <-v:
+		return value, nil
+	case err := <-e:
+		return nil, err
+	}
 }
 
 func GetGlobal() *DOM {
@@ -70,4 +83,20 @@ func unwrapValues(values []any) []any {
 		unwrappedValues[i] = unwrapValue(v)
 	}
 	return unwrappedValues
+}
+
+func onFulfilledCallback(value chan<- *DOM) js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		value <- &DOM{
+			jsValue: args[0],
+		}
+		return nil
+	})
+}
+
+func onRejectedCallback(err chan<- error) js.Func {
+	return js.FuncOf(func(this js.Value, args []js.Value) any {
+		err <- errors.New(args[0].String())
+		return nil
+	})
 }

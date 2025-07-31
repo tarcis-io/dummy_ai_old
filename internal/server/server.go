@@ -10,14 +10,14 @@ import (
 )
 
 type (
-	templateData struct {
+	pageData struct {
 		Title    string
 		WASMPath string
 	}
 )
 
 var (
-	pageRoutes = map[string]*templateData{
+	pageRoutes = map[string]*pageData{
 		"/": {
 			Title:    "DummyAI",
 			WASMPath: "/wasm/home.wasm",
@@ -29,19 +29,19 @@ var (
 	}
 
 	//go:embed template.html
-	htmlTemplateFS embed.FS
-	htmlTemplate   = template.Must(template.ParseFS(htmlTemplateFS, "template.html"))
+	pageTemplateFS embed.FS
+	pageTemplate   = template.Must(template.ParseFS(pageTemplateFS, "template.html"))
 
 	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
 func Run() {
 	router := http.NewServeMux()
-	router.HandleFunc("/", handleRequest)
+	router.HandleFunc("/", rootHandler)
 	listenAndServe(env.ServerAddress(), router)
 }
 
-func handleRequest(w http.ResponseWriter, r *http.Request) {
+func rootHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		log.Printf("[error] Method not allowed: %s", r.Method)
 		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
@@ -55,10 +55,10 @@ func handleRequest(w http.ResponseWriter, r *http.Request) {
 	serveStaticFile(w, r)
 }
 
-func renderPage(w http.ResponseWriter, t *templateData) {
-	err := htmlTemplate.Execute(w, t)
+func renderPage(w http.ResponseWriter, p *pageData) {
+	err := pageTemplate.Execute(w, p)
 	if err != nil {
-		log.Printf("[error] Failed to render page %s: %v", t.WASMPath, err)
+		log.Printf("[error] Failed to render page %s: %v", p.WASMPath, err)
 		http.Error(w, "500 internal server error", http.StatusInternalServerError)
 	}
 }

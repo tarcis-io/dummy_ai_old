@@ -84,7 +84,6 @@ func CurrentLanguage() *Language {
 }
 
 func SetLanguage(language *Language) {
-	currentLanguage = language
 	dom.GetLocalStorage().SetItem("language", language.code)
 }
 

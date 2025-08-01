@@ -26,7 +26,7 @@ USER dummy_ai
 COPY --chown=dummy_ai --from=build build/dummy_ai .
 COPY --chown=dummy_ai static/ static/
 
-# Inform the container port
+# Inform the container port that the Go application is listening on
 EXPOSE 8080
 
 # Run the Go application

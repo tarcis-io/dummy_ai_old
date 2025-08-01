@@ -1,6 +1,7 @@
 package dom
 
 import (
+	"encoding/json"
 	"errors"
 	"syscall/js"
 )
@@ -67,6 +68,23 @@ func GetGlobal() *DOM {
 	return &DOM{
 		jsValue: js.Global(),
 	}
+}
+
+func Fetch[T any](url string) (*T, error) {
+	v, err := GetGlobal().Call("fetch", url).Await()
+	if err != nil {
+		return nil, err
+	}
+	v, err = v.Call("text").Await()
+	if err != nil {
+		return nil, err
+	}
+	var t T
+	err = json.Unmarshal([]byte(v.String()), &t)
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
 }
 
 func unwrapValue(value any) any {

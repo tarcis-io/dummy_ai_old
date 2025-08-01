@@ -2,27 +2,32 @@
 FROM golang:1.24 AS build
 WORKDIR /build
 
+# Create a non-root user
 RUN useradd -u 10001 dummy_ai
 
+# Download dependencies
 COPY go.mod go.sum .
 RUN go mod download
 
+# Build the Go application
 COPY cmd/ cmd/
 COPY internal/ internal/
-
-# Build the Go application
 RUN CGO_ENABLED=0 go build -ldflags="-w -s" -o dummy_ai ./cmd/dummy_ai/
 
 # ----- Application Stage -----
 FROM scratch AS app
 WORKDIR /app
 
+# Copy and switch to the non-root user
 COPY --from=build /etc/passwd /etc/passwd
 USER dummy_ai
 
+# Copy the Go application and static assets
 COPY --chown=dummy_ai --from=build build/dummy_ai .
 COPY --chown=dummy_ai static/ static/
 
+# Inform the container port
 EXPOSE 8080
 
+# Run the Go application
 ENTRYPOINT ["./dummy_ai"]

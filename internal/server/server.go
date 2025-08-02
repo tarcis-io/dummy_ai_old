@@ -1,4 +1,5 @@
-// Package server provides a simple web server for serving HTML pages and static assets.
+// Package server provides a simple web server
+// for serving HTML pages and static assets.
 package server
 
 import (
@@ -49,9 +50,11 @@ func Run() {
 	listenAndServe(env.ServerAddress(), router)
 }
 
-// rootHandler handles all incoming requests and routes them to the appropriate handler.
+// rootHandler handles all incoming requests
+// and routes them to the appropriate handler.
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	// Only allow GET requests.
+	// Check if the request is a GET request.
+	// If not, reply with an error 405.
 	if r.Method != http.MethodGet {
 		log.Printf("[error] Method not allowed: %s", r.Method)
 		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
@@ -63,12 +66,14 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		renderPage(w, p)
 		return
 	}
-	// Serve static files for all other URL paths.
-	// Reply error 404 if the file is not found.
+	// Check if the URL path corresponds to a static file.
+	// If not, reply with an error 404.
 	serveStaticFile(w, r)
 }
 
-// renderPage executes the HTML template with the provided page data and writes the result to the response writer.
+// renderPage executes the HTML template with the provided page data
+// and writes the result to the response writer.
+// If there is an error executing the template, it replies with an error 500.
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := pageTemplate.Execute(w, p)
 	if err != nil {
@@ -77,13 +82,15 @@ func renderPage(w http.ResponseWriter, p *pageData) {
 	}
 }
 
-// serveStaticFile serves static files.
+// serveStaticFile writes the contents of a static file to the response writer.
+// If the file is not found, it replies with an error 404.
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	staticFileServer.ServeHTTP(w, r)
 }
 
 // listenAndServe starts the web server and listens for incoming requests.
+// If there is an error starting the server, it exits the application.
 func listenAndServe(addr string, handler http.Handler) {
 	log.Printf("[info] Server is running on %s", addr)
 	err := http.ListenAndServe(addr, handler)

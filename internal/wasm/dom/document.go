@@ -12,7 +12,7 @@ func (d *Document) CreateElement(tagName string) *DOM {
 	return d.Call("createElement", tagName)
 }
 
-// GetDocument returns the web page's current Document object.
+// GetDocument returns the web page's current *Document object.
 func GetDocument() *Document {
 	return GetWindow().Document()
 }

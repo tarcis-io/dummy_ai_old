@@ -7,12 +7,12 @@ type (
 	}
 )
 
-// SetItem sets the value of the specified key in the LocalStorage object.
+// SetItem sets the value of the specified key in the *LocalStorage object.
 func (l *LocalStorage) SetItem(key, value string) {
 	l.Call("setItem", key, value)
 }
 
-// GetItem retrieves the value of the specified key from the LocalStorage object.
+// GetItem retrieves the value of the specified key from the *LocalStorage object.
 func (l *LocalStorage) GetItem(key string) (string, bool) {
 	v := l.Call("getItem", key)
 	if v.Truthy() {
@@ -21,7 +21,7 @@ func (l *LocalStorage) GetItem(key string) (string, bool) {
 	return "", false
 }
 
-// GetLocalStorage returns the web page's current LocalStorage object.
+// GetLocalStorage returns the web page's current *LocalStorage object.
 func GetLocalStorage() *LocalStorage {
 	return GetWindow().LocalStorage()
 }

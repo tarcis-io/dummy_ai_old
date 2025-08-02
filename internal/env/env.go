@@ -1,4 +1,5 @@
-// Package env provides a centralized way to manage configuration settings for the application.
+// Package env provides a centralized way to manage configuration settings
+// for the application.
 package env
 
 import (
@@ -14,7 +15,8 @@ type (
 )
 
 var (
-	// configMap stores the loaded configuration settings, initialized from environment variables or defaults.
+	// configMap stores the loaded configuration settings
+	// initialized from environment variables or defaults.
 	configMap = &config{
 		languageCode:  lookupEnv("LANGUAGE_CODE", "en"),
 		serverAddress: lookupEnv("SERVER_ADDRESS", ":8080"),
@@ -31,7 +33,8 @@ func ServerAddress() string {
 	return configMap.serverAddress
 }
 
-// lookupEnv retrieves the value of an environment variable or returns a default value if not found.
+// lookupEnv retrieves the value of an environment variable
+// or returns a default value if not found.
 func lookupEnv(key, defaultValue string) string {
 	v, ok := os.LookupEnv(key)
 	if ok {

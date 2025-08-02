@@ -1,3 +1,4 @@
+// Package server provides a simple web server for serving HTML pages and static assets.
 package server
 
 import (
@@ -10,6 +11,7 @@ import (
 )
 
 type (
+	// pageData represents the data needed to render an HTML page.
 	pageData struct {
 		Title    string
 		WASMPath string
@@ -17,6 +19,7 @@ type (
 )
 
 var (
+	// pageRoutes maps URL paths to their corresponding page data.
 	pageRoutes = map[string]*pageData{
 		"/": {
 			Title:    "DummyAI",
@@ -28,33 +31,44 @@ var (
 		},
 	}
 
+	// pageTemplateFS embeds the HTML template file for rendering pages.
 	//go:embed template.html
 	pageTemplateFS embed.FS
-	pageTemplate   = template.Must(template.ParseFS(pageTemplateFS, "template.html"))
 
+	// pageTemplate is the parsed HTML template used for rendering pages.
+	pageTemplate = template.Must(template.ParseFS(pageTemplateFS, "template.html"))
+
+	// staticFileServer serves static files from the "./static" directory.
 	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
+// Run starts the web server and listens for incoming requests.
 func Run() {
 	router := http.NewServeMux()
 	router.HandleFunc("/", rootHandler)
 	listenAndServe(env.ServerAddress(), router)
 }
 
+// rootHandler handles all incoming requests and routes them to the appropriate handler.
 func rootHandler(w http.ResponseWriter, r *http.Request) {
+	// Only allow GET requests.
 	if r.Method != http.MethodGet {
 		log.Printf("[error] Method not allowed: %s", r.Method)
 		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
+	// Check if the URL path corresponds to a defined page.
 	p, ok := pageRoutes[r.URL.Path]
 	if ok {
 		renderPage(w, p)
 		return
 	}
+	// Serve static files for all other URL paths.
+	// Reply error 404 if the file is not found.
 	serveStaticFile(w, r)
 }
 
+// renderPage executes the HTML template with the provided page data and writes the result to the response writer.
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := pageTemplate.Execute(w, p)
 	if err != nil {
@@ -63,11 +77,13 @@ func renderPage(w http.ResponseWriter, p *pageData) {
 	}
 }
 
+// serveStaticFile serves static files.
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	staticFileServer.ServeHTTP(w, r)
 }
 
+// listenAndServe starts the web server and listens for incoming requests.
 func listenAndServe(addr string, handler http.Handler) {
 	log.Printf("[info] Server is running on %s", addr)
 	err := http.ListenAndServe(addr, handler)

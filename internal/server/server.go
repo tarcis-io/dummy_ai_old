@@ -12,7 +12,7 @@ import (
 )
 
 type (
-	// pageData represents the data needed to render an HTML page.
+	// pageData holds data for rendering HTML pages.
 	pageData struct {
 		Title    string
 		WASMPath string
@@ -20,7 +20,7 @@ type (
 )
 
 var (
-	// pageRoutes maps URL paths to their corresponding page data.
+	// pageRoutes maps URL paths to [pageData].
 	pageRoutes = map[string]*pageData{
 		"/": {
 			Title:    "DummyAI",
@@ -32,48 +32,41 @@ var (
 		},
 	}
 
-	// pageTemplateFS embeds the HTML template file for rendering pages.
+	// pageTemplateFS embeds the template.html file.
 	//go:embed template.html
 	pageTemplateFS embed.FS
 
-	// pageTemplate is the parsed HTML template used for rendering pages.
+	// pageTemplate is the parsed template.html file as a [*template.Template].
 	pageTemplate = template.Must(template.ParseFS(pageTemplateFS, "template.html"))
 
-	// staticFileServer serves static files from the "./static" directory.
+	// staticFileServer serves static files from the ./static directory.
 	staticFileServer = http.FileServer(http.Dir("./static"))
 )
 
-// Run starts the web server and listens for incoming requests.
+// Run starts the web server.
 func Run() {
 	router := http.NewServeMux()
 	router.HandleFunc("/", rootHandler)
 	listenAndServe(env.ServerAddress(), router)
 }
 
-// rootHandler handles all incoming requests
-// and routes them to the appropriate handler.
+// rootHandler handles and routes incoming requests.
 func rootHandler(w http.ResponseWriter, r *http.Request) {
-	// Check if the request is a GET request.
-	// If not, reply with an error 405.
 	if r.Method != http.MethodGet {
 		log.Printf("[error] Method not allowed: %s", r.Method)
 		http.Error(w, "405 method not allowed", http.StatusMethodNotAllowed)
 		return
 	}
-	// Check if the URL path corresponds to a defined page.
 	p, ok := pageRoutes[r.URL.Path]
 	if ok {
 		renderPage(w, p)
 		return
 	}
-	// Check if the URL path corresponds to a static file.
-	// If not, reply with an error 404.
 	serveStaticFile(w, r)
 }
 
-// renderPage executes the HTML template with the provided page data
-// and writes the result to the response writer.
-// If there is an error executing the template, it replies with an error 500.
+// renderPage executes the template and writes to the response.
+// Returns error 500 on template execution error.
 func renderPage(w http.ResponseWriter, p *pageData) {
 	err := pageTemplate.Execute(w, p)
 	if err != nil {
@@ -82,15 +75,15 @@ func renderPage(w http.ResponseWriter, p *pageData) {
 	}
 }
 
-// serveStaticFile writes the contents of a static file to the response writer.
-// If the file is not found, it replies with an error 404.
+// serveStaticFile writes static file contents to the response.
+// Returns error 404 on file not found.
 func serveStaticFile(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Cache-Control", "public, max-age=86400")
 	staticFileServer.ServeHTTP(w, r)
 }
 
-// listenAndServe starts the web server and listens for incoming requests.
-// If there is an error starting the server, it exits the application.
+// listenAndServe starts the web server.
+// Exits the application on server startup error.
 func listenAndServe(addr string, handler http.Handler) {
 	log.Printf("[info] Server is running on %s", addr)
 	err := http.ListenAndServe(addr, handler)

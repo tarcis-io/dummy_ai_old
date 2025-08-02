@@ -7,7 +7,7 @@ import (
 )
 
 type (
-	// config represents the configuration settings for the application.
+	// config holds application configuration settings.
 	config struct {
 		languageCode  string
 		serverAddress string
@@ -15,26 +15,24 @@ type (
 )
 
 var (
-	// configMap stores the loaded configuration settings
-	// initialized from environment variables or defaults.
+	// configMap stores configuration settings loaded from env or defaults.
 	configMap = &config{
 		languageCode:  lookupEnv("LANGUAGE_CODE", "en"),
 		serverAddress: lookupEnv("SERVER_ADDRESS", ":8080"),
 	}
 )
 
-// LanguageCode returns the configured language code for the application.
+// LanguageCode returns the configured LANGUAGE_CODE for the application.
 func LanguageCode() string {
 	return configMap.languageCode
 }
 
-// ServerAddress returns the configured server address for the application.
+// ServerAddress returns the configured SERVER_ADDRESS for the application.
 func ServerAddress() string {
 	return configMap.serverAddress
 }
 
-// lookupEnv retrieves the value of an environment variable
-// or returns a default value if not found.
+// lookupEnv retrieves an environment variable or returns a default.
 func lookupEnv(key, defaultValue string) string {
 	v, ok := os.LookupEnv(key)
 	if ok {

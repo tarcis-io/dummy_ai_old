@@ -63,7 +63,7 @@ var (
 	}
 
 	// currentLanguage holds the currently selected language.
-	currentLanguage = LookupLanguage()
+	currentLanguage *Language
 )
 
 // English returns the English language.

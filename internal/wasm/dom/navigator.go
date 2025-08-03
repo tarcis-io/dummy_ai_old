@@ -16,8 +16,7 @@ func (n *Navigator) Language() (string, bool) {
 	return "", false
 }
 
-// MediaDevices returns a [*MediaDevices] object
-// which can be used to access media devices.
+// MediaDevices returns a [*MediaDevices] object for accessing media devices.
 func (n *Navigator) MediaDevices() *MediaDevices {
 	return &MediaDevices{
 		DOM: n.Get("mediaDevices"),

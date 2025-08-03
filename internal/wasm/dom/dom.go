@@ -120,7 +120,8 @@ func unwrapValues(values []any) []any {
 	return unwrappedValues
 }
 
-// onFulfilledCallback returns a JavaScript function that is called when a Promise is fulfilled.
+// onFulfilledCallback returns a JavaScript function
+// that is called when a Promise is fulfilled.
 func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		valueChan <- &DOM{
@@ -130,7 +131,8 @@ func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 	})
 }
 
-// onRejectedCallback returns a JavaScript function that is called when a Promise is rejected.
+// onRejectedCallback returns a JavaScript function
+// that is called when a Promise is rejected.
 func onRejectedCallback(errorChan chan<- error) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		errorChan <- errors.New(args[0].String())

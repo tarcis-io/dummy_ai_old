@@ -17,6 +17,15 @@ type (
 )
 
 var (
+	// englishLocale represents the localized strings
+	// for the English language.
+	englishLocale = &locale{
+		App:            "DummyAI",
+		AppDescription: "Artificial intelligence for dummies",
+		AppDevelopedBy: "Developed by t@rcis.io",
+		AppVersion:     "Version v0.0.1",
+	}
+
 	// currentLocale holds the currently loaded locale.
 	currentLocale = fetchCurrentLocale()
 )
@@ -43,6 +52,12 @@ func AppVersion() string {
 
 // fetchCurrentLocale fetches the current locale for the currently selected language.
 func fetchCurrentLocale() *locale {
-	v, _ := dom.Fetch[locale](fmt.Sprintf("/locale/%s.json", currentLanguage.code))
+	if currentLanguage == english {
+		return englishLocale
+	}
+	v, err := dom.Fetch[locale](fmt.Sprintf("/locale/%s.json", currentLanguage.code))
+	if err != nil {
+		return englishLocale
+	}
 	return v
 }

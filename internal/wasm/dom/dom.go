@@ -77,7 +77,7 @@ func (d *DOM) Await() (*DOM, error) {
 	}
 }
 
-// GetGlobal returns the global object.
+// GetGlobal returns the current global object.
 func GetGlobal() *DOM {
 	return &DOM{
 		jsValue: js.Global(),

@@ -50,7 +50,8 @@ func Run() {
 	listenAndServe(env.ServerAddress(), router)
 }
 
-// rootHandler handles and routes incoming requests.
+// rootHandler handles and routes incoming page requests
+// and serves static files.
 func rootHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method != http.MethodGet {
 		log.Printf("[error] Method not allowed: %s", r.Method)

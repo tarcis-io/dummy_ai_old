@@ -1,5 +1,5 @@
 // Package dom provides a Go-friendly wrapper
-// for interacting with the JavaScript DOM.
+// for interacting with the JavaScript DOM API.
 package dom
 
 import (

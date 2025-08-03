@@ -7,12 +7,12 @@ type (
 	}
 )
 
-// CreateElement creates a new HTML element with the specified tag name and returns it as a new *DOM object.
+// CreateElement creates a new HTML element with the specified tag name.
 func (d *Document) CreateElement(tagName string) *DOM {
 	return d.Call("createElement", tagName)
 }
 
-// GetDocument returns the web page's current *Document object.
+// GetDocument returns the current JavaScript Document object.
 func GetDocument() *Document {
 	return GetWindow().Document()
 }

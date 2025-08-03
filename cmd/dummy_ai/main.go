@@ -7,6 +7,5 @@ import (
 
 // main is the entry point for the dummy_ai application.
 func main() {
-	// Run the server.
 	server.Run()
 }

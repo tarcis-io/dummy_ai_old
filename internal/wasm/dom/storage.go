@@ -1,15 +1,18 @@
 package dom
 
 type (
+	// Storage represents the JavaScript Storage object.
 	Storage struct {
 		*DOM
 	}
 )
 
+// SetItem sets the value for the given key in the Storage object.
 func (s *Storage) SetItem(key, value string) {
 	s.Call("setItem", key, value)
 }
 
+// GetItem returns the value for the given key in the Storage object.
 func (s *Storage) GetItem(key string) (string, bool) {
 	v := s.Call("getItem", key)
 	if v.Truthy() {
@@ -18,10 +21,12 @@ func (s *Storage) GetItem(key string) (string, bool) {
 	return "", false
 }
 
+// GetLocalStorage returns the current local Storage object.
 func GetLocalStorage() *Storage {
 	return GetWindow().LocalStorage()
 }
 
+// GetSessionStorage returns the current session Storage object.
 func GetSessionStorage() *Storage {
 	return GetWindow().SessionStorage()
 }

@@ -60,7 +60,7 @@ func (d *DOM) Call(method string, args ...any) *DOM {
 }
 
 // Await awaits the resolution of the DOM object.
-// It must be called on a promise-returning method.
+// It must be called on a Promise-returning method.
 func (d *DOM) Await() (*DOM, error) {
 	valueChan := make(chan *DOM)
 	errorChan := make(chan error)
@@ -120,7 +120,7 @@ func unwrapValues(values []any) []any {
 	return unwrappedValues
 }
 
-// onFulfilledCallback returns a JavaScript function that is called when a promise is fulfilled.
+// onFulfilledCallback returns a JavaScript function that is called when a Promise is fulfilled.
 func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		valueChan <- &DOM{
@@ -130,7 +130,7 @@ func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 	})
 }
 
-// onRejectedCallback returns a JavaScript function that is called when a promise is rejected.
+// onRejectedCallback returns a JavaScript function that is called when a Promise is rejected.
 func onRejectedCallback(errorChan chan<- error) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		errorChan <- errors.New(args[0].String())

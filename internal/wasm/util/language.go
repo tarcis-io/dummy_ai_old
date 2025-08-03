@@ -110,6 +110,7 @@ func SetLanguage(language *Language) {
 // 1. The browser's local storage.
 // 2. The browser's navigator settings.
 // 3. The environment variables.
+// It returns the fallback language if no supported language is found.
 func LookupLanguage() *Language {
 	v, ok := lookupLocalStorageLanguage()
 	if ok {

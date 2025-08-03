@@ -7,8 +7,8 @@ import (
 )
 
 type (
-	// locale holds the localized strings for the application.
-	locale struct {
+	// Locale holds the localized strings for the application.
+	Locale struct {
 		App            string `json:"app"`
 		AppDescription string `json:"appDescription"`
 		AppDevelopedBy string `json:"appDevelopedBy"`
@@ -19,7 +19,7 @@ type (
 var (
 	// englishLocale represents the localized strings
 	// for the English language.
-	englishLocale = &locale{
+	englishLocale = &Locale{
 		App:            "DummyAI",
 		AppDescription: "Artificial intelligence for dummies",
 		AppDevelopedBy: "Developed by t@rcis.io",
@@ -27,8 +27,18 @@ var (
 	}
 
 	// currentLocale holds the currently loaded locale.
-	currentLocale = fetchCurrentLocale()
+	currentLocale *Locale
 )
+
+// EnglishLocale returns the localized strings for the English language.
+func EnglishLocale() *Locale {
+	return englishLocale
+}
+
+// CurrentLocale returns the currently loaded locale.
+func CurrentLocale() *Locale {
+	return currentLocale
+}
 
 // App returns the localized name of the application.
 func App() string {
@@ -50,12 +60,12 @@ func AppVersion() string {
 	return currentLocale.AppVersion
 }
 
-// fetchCurrentLocale fetches the current locale for the currently selected language.
-func fetchCurrentLocale() *locale {
+// FetchCurrentLocale fetches the current locale for the currently selected language.
+func FetchCurrentLocale() *Locale {
 	if currentLanguage == english {
 		return englishLocale
 	}
-	v, err := dom.Fetch[locale](fmt.Sprintf("/locale/%s.json", currentLanguage.code))
+	v, err := dom.Fetch[Locale](fmt.Sprintf("/locale/%s.json", currentLanguage.code))
 	if err != nil {
 		return englishLocale
 	}

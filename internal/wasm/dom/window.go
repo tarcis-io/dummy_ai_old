@@ -12,15 +12,21 @@ func (w *Window) Document() *Document {
 	}
 }
 
-func (w *Window) LocalStorage() *LocalStorage {
-	return &LocalStorage{
+func (w *Window) Navigator() *Navigator {
+	return &Navigator{
+		DOM: w.Get("navigator"),
+	}
+}
+
+func (w *Window) LocalStorage() *Storage {
+	return &Storage{
 		DOM: w.Get("localStorage"),
 	}
 }
 
-func (w *Window) Navigator() *Navigator {
-	return &Navigator{
-		DOM: w.Get("navigator"),
+func (w *Window) SessionStorage() *Storage {
+	return &Storage{
+		DOM: w.Get("sessionStorage"),
 	}
 }
 

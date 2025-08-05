@@ -1,9 +1,5 @@
 package element
 
-import (
-	"dummy_ai/internal/wasm/util"
-)
-
 func CreatePage(content *Element) *Element {
 	div := Create("div")
 	div.Set("className", "cds-theme-zone-g100")
@@ -35,14 +31,15 @@ func createPageHeaderImg() *Element {
 	img.Set("alt", "")
 	img.SetStyle("width", "var(--cds-spacing-07)")
 	img.SetStyle("height", "var(--cds-spacing-07)")
-	img.SetStyle("marginRight", "calc(-1 * var(--cds-spacing-03))")
+	img.SetStyle("marginRight", "calc(-1 * (var(--cds-spacing-03) + var(--cds-spacing-01)))")
 	img.SetStyle("marginLeft", "var(--cds-spacing-03)")
 	return img
 }
 
 func createPageHeaderName() *Element {
 	headerName := Create("cds-header-name")
-	headerName.Set("textContent", util.App())
+	headerName.Set("prefix", "Dummy")
+	headerName.Set("textContent", "AI")
 	return headerName
 }
 

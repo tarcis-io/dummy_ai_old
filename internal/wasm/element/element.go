@@ -23,6 +23,11 @@ func (e *Element) SetId(id string) {
 	e.Set("id", id)
 }
 
+// SetClassName sets the className property of the element.
+func (e *Element) SetClassName(className string) {
+	e.Set("className", className)
+}
+
 // SetTextContent sets the textContent property of the element.
 func (e *Element) SetTextContent(textContent string) {
 	e.Set("textContent", textContent)

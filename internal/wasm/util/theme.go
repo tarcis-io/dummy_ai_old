@@ -2,6 +2,7 @@ package util
 
 import (
 	"dummy_ai/internal/env"
+	"dummy_ai/internal/wasm/dom"
 )
 
 type (
@@ -63,11 +64,23 @@ func CurrentTheme() *Theme {
 }
 
 func LookupTheme() *Theme {
-	v, ok := lookupEnvTheme()
+	v, ok := lookupLocalStorageTheme()
+	if ok {
+		return v
+	}
+	v, ok = lookupEnvTheme()
 	if ok {
 		return v
 	}
 	return fallbackTheme
+}
+
+func lookupLocalStorageTheme() (*Theme, bool) {
+	v, ok := dom.GetLocalStorage().GetItem("theme")
+	if ok {
+		return lookupTheme(v)
+	}
+	return nil, false
 }
 
 func lookupEnvTheme() (*Theme, bool) {

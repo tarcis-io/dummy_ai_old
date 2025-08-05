@@ -13,7 +13,7 @@ func CreatePage(content *Element) *Element {
 
 func CreatePageHeader() *Element {
 	headerName := Create("cds-header-name")
-	headerName.SetTextContent(util.App())
+	headerName.Set("textContent", util.App())
 	header := Create("cds-header")
 	header.AppendChild(headerName)
 	return header

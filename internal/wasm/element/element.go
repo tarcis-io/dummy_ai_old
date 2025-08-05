@@ -28,6 +28,11 @@ func (e *Element) SetClass(class string) {
 	e.Set("class", class)
 }
 
+// AppendChild appends a child element to the element.
+func (e *Element) AppendChild(element *Element) {
+	e.dom.Call("appendChild", element.dom)
+}
+
 // Create creates a new HTML element with the specified tag name.
 func Create(tagName string) *Element {
 	return &Element{

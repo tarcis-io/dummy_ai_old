@@ -25,7 +25,7 @@ func (e *Element) SetId(id string) {
 
 // SetClass sets the class attribute of the element.
 func (e *Element) SetClass(class string) {
-	e.dom.Set("class", class)
+	e.Set("class", class)
 }
 
 // Create creates a new HTML element with the specified tag name.

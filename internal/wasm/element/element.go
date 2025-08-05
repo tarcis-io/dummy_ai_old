@@ -18,19 +18,14 @@ func (e *Element) Set(property string, value any) {
 	e.dom.Set(property, value)
 }
 
-// SetId sets the id property of the element.
-func (e *Element) SetId(id string) {
-	e.Set("id", id)
+// SetStyle sets a style property of the element.
+func (e *Element) SetStyle(style string, value any) {
+	e.dom.Get("style").Set(style, value)
 }
 
-// SetClassName sets the className property of the element.
-func (e *Element) SetClassName(className string) {
-	e.Set("className", className)
-}
-
-// SetTextContent sets the textContent property of the element.
-func (e *Element) SetTextContent(textContent string) {
-	e.Set("textContent", textContent)
+// SetAttribute sets an attribute of the element.
+func (e *Element) SetAttribute(attribute string, value any) {
+	e.dom.Call("setAttribute", attribute, value)
 }
 
 // AppendChild appends a child element to the element.

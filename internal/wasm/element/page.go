@@ -5,16 +5,26 @@ import (
 )
 
 func CreatePage(content *Element) *Element {
-	page := Create("div")
-	page.AppendChild(CreatePageHeader())
-	page.AppendChild(content)
-	return page
+	div := Create("div")
+	div.AppendChild(createPageHeader())
+	div.AppendChild(createPageContentContainer(content))
+	return div
 }
 
-func CreatePageHeader() *Element {
+func createPageHeader() *Element {
+	header := Create("cds-header")
+	header.AppendChild(createPageHeaderName())
+	return header
+}
+
+func createPageHeaderName() *Element {
 	headerName := Create("cds-header-name")
 	headerName.Set("textContent", util.App())
-	header := Create("cds-header")
-	header.AppendChild(headerName)
-	return header
+	return headerName
+}
+
+func createPageContentContainer(content *Element) *Element {
+	div := Create("div")
+	div.AppendChild(content)
+	return div
 }

@@ -62,7 +62,7 @@ func AppVersion() string {
 
 // FetchCurrentLocale fetches the current locale for the currently selected language.
 func FetchCurrentLocale() *Locale {
-	if currentLanguage == english {
+	if currentLanguage == englishLanguage {
 		return englishLocale
 	}
 	v, err := dom.Fetch[Locale](fmt.Sprintf("/locale/%s.json", currentLanguage.code))

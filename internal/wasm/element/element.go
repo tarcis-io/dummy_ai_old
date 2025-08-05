@@ -13,19 +13,14 @@ type (
 	}
 )
 
-// Set sets an attribute of the element.
-func (e *Element) Set(attribute string, value any) {
-	e.dom.Call("setAttribute", attribute, value)
+// Set sets a property of the element.
+func (e *Element) Set(property string, value any) {
+	e.dom.Set(property, value)
 }
 
-// SetId sets the id attribute of the element.
+// SetId sets the id property of the element.
 func (e *Element) SetId(id string) {
 	e.Set("id", id)
-}
-
-// SetClass sets the class attribute of the element.
-func (e *Element) SetClass(class string) {
-	e.Set("class", class)
 }
 
 // AppendChild appends a child element to the element.

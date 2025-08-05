@@ -23,6 +23,11 @@ func (e *Element) SetId(id string) {
 	e.Set("id", id)
 }
 
+// SetTextContent sets the textContent property of the element.
+func (e *Element) SetTextContent(textContent string) {
+	e.Set("textContent", textContent)
+}
+
 // AppendChild appends a child element to the element.
 func (e *Element) AppendChild(element *Element) {
 	e.dom.Call("appendChild", element.dom)

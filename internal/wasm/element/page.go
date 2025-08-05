@@ -14,7 +14,8 @@ func CreatePage(content *Element) *Element {
 	div.SetStyle("bottom", 0)
 	div.SetStyle("left", 0)
 	div.SetStyle("overflowY", "auto")
-	div.SetStyleProperty("--cds-background", "black")
+	div.SetStyle("backgroundColor", "var(--cds-background)")
+	div.SetStyle("color", "var(--cds-text-primary)")
 	div.AppendChild(createPageHeader())
 	div.AppendChild(createPageContentContainer(content))
 	return div

@@ -26,59 +26,59 @@ func (l *Language) Name() string {
 }
 
 var (
-	// english represents the English language.
-	english = &Language{
+	// englishLanguage represents the English language.
+	englishLanguage = &Language{
 		code: "en",
 		name: "English",
 	}
 
-	// spanish represents the Spanish language.
-	spanish = &Language{
+	// spanishLanguage represents the Spanish language.
+	spanishLanguage = &Language{
 		code: "es",
 		name: "Español",
 	}
 
-	// portuguese represents the Portuguese language.
-	portuguese = &Language{
+	// portugueseLanguage represents the Portuguese language.
+	portugueseLanguage = &Language{
 		code: "pt",
 		name: "Português",
 	}
 
 	// fallbackLanguage is the default language used
 	// if no other language can be determined.
-	fallbackLanguage = english
+	fallbackLanguage = englishLanguage
 
 	// supportedLanguages is a slice of all supported languages.
 	supportedLanguages = []*Language{
-		english,
-		spanish,
-		portuguese,
+		englishLanguage,
+		spanishLanguage,
+		portugueseLanguage,
 	}
 
 	// supportedLanguagesMap provides a quick lookup for supported languages.
 	supportedLanguagesMap = map[string]*Language{
-		english.code:    english,
-		spanish.code:    spanish,
-		portuguese.code: portuguese,
+		englishLanguage.code:    englishLanguage,
+		spanishLanguage.code:    spanishLanguage,
+		portugueseLanguage.code: portugueseLanguage,
 	}
 
 	// currentLanguage holds the currently selected language.
 	currentLanguage *Language
 )
 
-// English returns the English language.
-func English() *Language {
-	return english
+// EnglishLanguage returns the English language.
+func EnglishLanguage() *Language {
+	return englishLanguage
 }
 
-// Spanish returns the Spanish language.
-func Spanish() *Language {
-	return spanish
+// SpanishLanguage returns the Spanish language.
+func SpanishLanguage() *Language {
+	return spanishLanguage
 }
 
-// Portuguese returns the Portuguese language.
-func Portuguese() *Language {
-	return portuguese
+// PortugueseLanguage returns the Portuguese language.
+func PortugueseLanguage() *Language {
+	return portugueseLanguage
 }
 
 // FallbackLanguage returns the fallback language.

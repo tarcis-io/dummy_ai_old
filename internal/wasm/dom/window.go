@@ -35,6 +35,12 @@ func (w *Window) SessionStorage() *Storage {
 	}
 }
 
+// MatchMedia returns a boolean indicating if the Window matches
+// the given media query.
+func (w *Window) MatchMedia(query string) bool {
+	return w.Call("matchMedia", query).Get("matches").Bool()
+}
+
 // GetWindow returns the current Window object.
 func GetWindow() *Window {
 	return &Window{

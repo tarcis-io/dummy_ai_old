@@ -23,8 +23,21 @@ func CreatePage(content *Element) *Element {
 
 func createPageHeader() *Element {
 	header := Create("cds-header")
+	header.Set("ariaLabel", "")
+	header.AppendChild(createPageHeaderImg())
 	header.AppendChild(createPageHeaderName())
 	return header
+}
+
+func createPageHeaderImg() *Element {
+	img := Create("img")
+	img.Set("src", "/img/logo/logo.svg")
+	img.Set("alt", "")
+	img.SetStyle("width", "var(--cds-spacing-07)")
+	img.SetStyle("height", "var(--cds-spacing-07)")
+	img.SetStyle("marginRight", "calc(-1 * var(--cds-spacing-03))")
+	img.SetStyle("marginLeft", "var(--cds-spacing-03)")
+	return img
 }
 
 func createPageHeaderName() *Element {

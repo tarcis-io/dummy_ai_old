@@ -23,6 +23,12 @@ func (e *Element) SetStyle(style string, value any) {
 	e.dom.Get("style").Set(style, value)
 }
 
+// SetStyleProperty sets a style property of the element
+// using the JavaScript setProperty method.
+func (e *Element) SetStyleProperty(style string, value any) {
+	e.dom.Get("style").Call("setProperty", style, value)
+}
+
 // SetAttribute sets an attribute of the element.
 func (e *Element) SetAttribute(attribute string, value any) {
 	e.dom.Call("setAttribute", attribute, value)

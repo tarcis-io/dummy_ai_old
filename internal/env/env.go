@@ -11,6 +11,7 @@ type (
 	config struct {
 		languageCode  string
 		serverAddress string
+		theme         string
 	}
 )
 
@@ -19,6 +20,7 @@ var (
 	configMap = &config{
 		languageCode:  lookupEnv("LANGUAGE_CODE", "en"),
 		serverAddress: lookupEnv("SERVER_ADDRESS", ":8080"),
+		theme:         lookupEnv("THEME", "black"),
 	}
 )
 
@@ -30,6 +32,11 @@ func LanguageCode() string {
 // ServerAddress returns the configured SERVER_ADDRESS for the application.
 func ServerAddress() string {
 	return configMap.serverAddress
+}
+
+// Theme returns the configured THEME for the application.
+func Theme() string {
+	return configMap.theme
 }
 
 // lookupEnv retrieves an environment variable or returns a default.

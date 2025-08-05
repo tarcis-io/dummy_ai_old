@@ -13,14 +13,19 @@ type (
 	}
 )
 
-// SetId sets the id attribute of the element.
-func (e *Element) SetId(id string) {
-	e.dom.Set("id", id)
+// Set sets an attribute of the element.
+func (e *Element) Set(attribute string, value any) {
+	e.dom.Call("setAttribute", attribute, value)
 }
 
-// SetClassName sets the className attribute of the element.
-func (e *Element) SetClassName(className string) {
-	e.dom.Set("className", className)
+// SetId sets the id attribute of the element.
+func (e *Element) SetId(id string) {
+	e.Set("id", id)
+}
+
+// SetClass sets the class attribute of the element.
+func (e *Element) SetClass(class string) {
+	e.dom.Set("class", class)
 }
 
 // Create creates a new HTML element with the specified tag name.

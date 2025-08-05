@@ -1,5 +1,9 @@
 package util
 
+import (
+	"dummy_ai/internal/env"
+)
+
 type (
 	Theme struct {
 		theme string
@@ -21,6 +25,16 @@ var (
 
 	fallbackTheme = black
 
+	supportedThemes = []*Theme{
+		black,
+		white,
+	}
+
+	supportedThemesMap = map[string]*Theme{
+		black.theme: black,
+		white.theme: white,
+	}
+
 	currentTheme *Theme
 )
 
@@ -36,6 +50,31 @@ func FallbackTheme() *Theme {
 	return fallbackTheme
 }
 
+func SupportedThemes() []*Theme {
+	return supportedThemes
+}
+
+func SupportedThemesMap() map[string]*Theme {
+	return supportedThemesMap
+}
+
 func CurrentTheme() *Theme {
 	return currentTheme
+}
+
+func LookupTheme() *Theme {
+	v, ok := lookupEnvTheme()
+	if ok {
+		return v
+	}
+	return fallbackTheme
+}
+
+func lookupEnvTheme() (*Theme, bool) {
+	return lookupTheme(env.Theme())
+}
+
+func lookupTheme(theme string) (*Theme, bool) {
+	v, ok := supportedThemesMap[theme]
+	return v, ok
 }

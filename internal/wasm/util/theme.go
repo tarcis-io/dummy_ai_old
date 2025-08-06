@@ -7,21 +7,28 @@ import (
 
 type (
 	Theme struct {
-		theme string
+		code string
+		name string
 	}
 )
 
-func (t *Theme) Theme() string {
-	return t.theme
+func (t *Theme) Code() string {
+	return t.code
+}
+
+func (t *Theme) Name() string {
+	return t.name
 }
 
 var (
 	black = &Theme{
-		theme: "black",
+		code: "black",
+		name: "Black",
 	}
 
 	white = &Theme{
-		theme: "white",
+		code: "white",
+		name: "White",
 	}
 
 	fallbackTheme = black
@@ -32,8 +39,8 @@ var (
 	}
 
 	supportedThemesMap = map[string]*Theme{
-		black.theme: black,
-		white.theme: white,
+		black.code: black,
+		white.code: white,
 	}
 
 	currentTheme *Theme
@@ -61,6 +68,10 @@ func SupportedThemesMap() map[string]*Theme {
 
 func CurrentTheme() *Theme {
 	return currentTheme
+}
+
+func SetTheme(theme *Theme) {
+	dom.GetLocalStorage().SetItem("theme", theme.code)
 }
 
 func LookupTheme() *Theme {

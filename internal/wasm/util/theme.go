@@ -68,6 +68,10 @@ func LookupTheme() *Theme {
 	if ok {
 		return v
 	}
+	v, ok = lookupPreferredTheme()
+	if ok {
+		return v
+	}
 	v, ok = lookupEnvTheme()
 	if ok {
 		return v
@@ -79,6 +83,16 @@ func lookupLocalStorageTheme() (*Theme, bool) {
 	v, ok := dom.GetLocalStorage().GetItem("theme")
 	if ok {
 		return lookupTheme(v)
+	}
+	return nil, false
+}
+
+func lookupPreferredTheme() (*Theme, bool) {
+	if dom.GetWindow().MatchMedia("(prefers-color-scheme: dark)") {
+		return black, true
+	}
+	if dom.GetWindow().MatchMedia("(prefers-color-scheme: light)") {
+		return white, true
 	}
 	return nil, false
 }

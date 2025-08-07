@@ -111,7 +111,7 @@ func unwrapValue(value any) any {
 	return value
 }
 
-// unwrapValues unwraps a slice values into a slice of JavaScript values.
+// unwrapValues unwraps a slice of values into a slice of JavaScript values.
 func unwrapValues(values []any) []any {
 	unwrappedValues := make([]any, len(values))
 	for i, v := range values {

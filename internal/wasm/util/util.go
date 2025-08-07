@@ -5,6 +5,6 @@ package util
 // It configures the package's initial state.
 func init() {
 	currentLanguage = LookupLanguage()
-	currentLocale = FetchCurrentLocale()
+	currentLocale = FetchLocale(currentLanguage)
 	currentTheme = LookupTheme()
 }

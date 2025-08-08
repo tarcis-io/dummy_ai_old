@@ -3,7 +3,6 @@
 package dom
 
 import (
-	"encoding/json"
 	"errors"
 	"syscall/js"
 )
@@ -82,24 +81,6 @@ func Global() *DOM {
 	return &DOM{
 		jsValue: js.Global(),
 	}
-}
-
-// Fetch fetches a URL and unmarshals the response into a struct.
-func Fetch[T any](url string) (*T, error) {
-	v, err := Global().Call("fetch", url).Await()
-	if err != nil {
-		return nil, err
-	}
-	v, err = v.Call("text").Await()
-	if err != nil {
-		return nil, err
-	}
-	var t T
-	err = json.Unmarshal([]byte(v.String()), &t)
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
 }
 
 // unwrapValue unwraps a value into a JavaScript value.

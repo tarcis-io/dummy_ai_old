@@ -77,8 +77,8 @@ func (d *DOM) Await() (*DOM, error) {
 	}
 }
 
-// GetGlobal returns the current global object.
-func GetGlobal() *DOM {
+// Global returns the current global object.
+func Global() *DOM {
 	return &DOM{
 		jsValue: js.Global(),
 	}
@@ -86,7 +86,7 @@ func GetGlobal() *DOM {
 
 // Fetch fetches a URL and unmarshals the response into a struct.
 func Fetch[T any](url string) (*T, error) {
-	v, err := GetGlobal().Call("fetch", url).Await()
+	v, err := Global().Call("fetch", url).Await()
 	if err != nil {
 		return nil, err
 	}

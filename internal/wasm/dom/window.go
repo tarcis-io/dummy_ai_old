@@ -53,6 +53,6 @@ func (w *Window) MatchMedia(query string) *MediaQueryList {
 // GetWindow returns the current Window object.
 func GetWindow() *Window {
 	return &Window{
-		DOM: GetGlobal(),
+		DOM: Global(),
 	}
 }

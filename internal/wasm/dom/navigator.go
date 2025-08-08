@@ -26,8 +26,3 @@ func (n *Navigator) MediaDevices() *MediaDevices {
 		DOM: n.Get("mediaDevices"),
 	}
 }
-
-// GetNavigator returns the current Navigator object.
-func GetNavigator() *Navigator {
-	return GetWindow().Navigator()
-}

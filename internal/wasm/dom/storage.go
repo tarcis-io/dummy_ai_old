@@ -24,13 +24,3 @@ func (s *Storage) GetItem(key string) (string, error) {
 	}
 	return "", fmt.Errorf("Item with key %q not found", key)
 }
-
-// GetLocalStorage returns the current local Storage object.
-func GetLocalStorage() *Storage {
-	return GetWindow().LocalStorage()
-}
-
-// GetSessionStorage returns the current session Storage object.
-func GetSessionStorage() *Storage {
-	return GetWindow().SessionStorage()
-}

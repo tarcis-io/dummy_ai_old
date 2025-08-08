@@ -17,8 +17,3 @@ func (m *MediaDevices) GetUserMedia(constraints map[string]any) (*MediaStream, e
 		DOM: v,
 	}, nil
 }
-
-// GetMediaDevices returns the current MediaDevices object.
-func GetMediaDevices() *MediaDevices {
-	return GetNavigator().MediaDevices()
-}

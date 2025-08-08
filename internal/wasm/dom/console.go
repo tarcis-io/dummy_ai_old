@@ -11,8 +11,3 @@ type (
 func (c *Console) Log(message string) {
 	c.Call("log", message)
 }
-
-// GetConsole returns the current Console object.
-func GetConsole() *Console {
-	return GetWindow().Console()
-}

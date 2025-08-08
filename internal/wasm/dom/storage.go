@@ -1,9 +1,5 @@
 package dom
 
-import (
-	"fmt"
-)
-
 type (
 	// Storage represents the JavaScript Storage object.
 	Storage struct {
@@ -17,10 +13,10 @@ func (s *Storage) SetItem(key, value string) {
 }
 
 // GetItem returns the value for the specified key in the Storage object.
-func (s *Storage) GetItem(key string) (string, error) {
+func (s *Storage) GetItem(key string) (string, bool) {
 	v := s.Call("getItem", key)
 	if v.Truthy() {
-		return v.String(), nil
+		return v.String(), true
 	}
-	return "", fmt.Errorf("Item with key %q not found", key)
+	return "", false
 }

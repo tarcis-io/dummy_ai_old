@@ -1,9 +1,5 @@
 package dom
 
-import (
-	"fmt"
-)
-
 type (
 	// Navigator represents the JavaScript Navigator object.
 	Navigator struct {
@@ -12,12 +8,12 @@ type (
 )
 
 // Language returns the user's preferred language.
-func (n *Navigator) Language() (string, error) {
+func (n *Navigator) Language() (string, bool) {
 	v := n.Get("language")
 	if v.Truthy() {
-		return v.String(), nil
+		return v.String(), true
 	}
-	return "", fmt.Errorf("Language not found")
+	return "", false
 }
 
 // MediaDevices returns a [*MediaDevices] object for accessing media devices.

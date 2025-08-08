@@ -3,7 +3,7 @@
 package dom
 
 import (
-	"errors"
+	"fmt"
 	"syscall/js"
 )
 
@@ -116,7 +116,7 @@ func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 // that is called when a Promise is rejected.
 func onRejectedCallback(errorChan chan<- error) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
-		errorChan <- errors.New(args[0].String())
+		errorChan <- fmt.Errorf("%s: %s", args[0].Get("name").String(), args[0].Get("message").String())
 		return nil
 	})
 }

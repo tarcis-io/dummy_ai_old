@@ -75,9 +75,9 @@ func (d *DOM) Call(method string, args ...any) *DOM {
 func (d *DOM) Await() (*DOM, error) {
 	valueChan := make(chan *DOM)
 	errorChan := make(chan error)
-	onFulfilled := onFulfilledCallback(valueChan)
+	onFulfilled := onFulfilled(valueChan)
 	defer onFulfilled.Release()
-	onRejected := onRejectedCallback(errorChan)
+	onRejected := onRejected(errorChan)
 	defer onRejected.Release()
 	d.Call("then", onFulfilled, onRejected)
 	select {
@@ -113,9 +113,9 @@ func unwrapValues(values []any) []any {
 	return unwrappedValues
 }
 
-// onFulfilledCallback returns a JavaScript function
+// onFulfilled returns a JavaScript function
 // that is called when a Promise is fulfilled.
-func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
+func onFulfilled(valueChan chan<- *DOM) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		valueChan <- &DOM{
 			jsValue: args[0],
@@ -124,9 +124,9 @@ func onFulfilledCallback(valueChan chan<- *DOM) js.Func {
 	})
 }
 
-// onRejectedCallback returns a JavaScript function
+// onRejected returns a JavaScript function
 // that is called when a Promise is rejected.
-func onRejectedCallback(errorChan chan<- error) js.Func {
+func onRejected(errorChan chan<- error) js.Func {
 	return js.FuncOf(func(this js.Value, args []js.Value) any {
 		errorChan <- fmt.Errorf("%s: %s", args[0].Get("name").String(), args[0].Get("message").String())
 		return nil

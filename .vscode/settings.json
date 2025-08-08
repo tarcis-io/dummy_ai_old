@@ -1,0 +1,28 @@
+{
+	"editor.detectIndentation": false,
+	"editor.folding": false,
+	"editor.insertSpaces": false,
+	"editor.lightbulb.enabled": "off",
+	"editor.minimap.enabled": false,
+	"editor.stickyScroll.enabled": false,
+	"explorer.compactFolders": false,
+	"files.exclude": {
+		"**/*.idx": false,
+		"**/*.vscode": false,
+		"**/*.gitignore": false
+	},
+	"files.insertFinalNewline": true,
+	"files.trimTrailingWhitespace": true,
+	"go.toolsEnvVars": {
+		"GOOS": "js",
+		"GOARCH": "wasm"
+	},
+	"html.format.indentInnerHtml": true,
+	"html.format.wrapLineLength": 256,
+	"IDX.aI.enableCodebaseIndexing": true,
+	"IDX.aI.enableInlineCompletion": true,
+	"javascript.validate.enable": false,
+	"[markdown]": {
+		"editor.wordWrap": "off"
+	}
+}

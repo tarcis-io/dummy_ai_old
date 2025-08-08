@@ -67,6 +67,7 @@ func FetchLocale(language *Language) *Locale {
 	}
 	v, err := dom.Fetch[Locale](fmt.Sprintf("/locale/%s.json", language.code))
 	if err != nil {
+		dom.GetConsole().Log(fmt.Sprintf("[error] Failed to fetch locale for language %s: %v", language.code, err))
 		return englishLocale
 	}
 	return v

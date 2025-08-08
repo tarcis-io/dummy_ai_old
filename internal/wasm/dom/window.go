@@ -42,7 +42,7 @@ func (w *Window) SessionStorage() *Storage {
 	}
 }
 
-// MatchMedia returns a [*MediaQueryList] object
+// MatchMedia returns a MediaQueryList object
 // representing the specified media query string.
 func (w *Window) MatchMedia(query string) *MediaQueryList {
 	return &MediaQueryList{

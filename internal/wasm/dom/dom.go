@@ -40,11 +40,13 @@ func (d *DOM) Truthy() bool {
 }
 
 // Length returns the length of the DOM object.
+// It must be called on an Array-like object.
 func (d *DOM) Length() int {
 	return d.jsValue.Length()
 }
 
 // Index returns the DOM object at the given index.
+// It must be called on an Array-like object.
 func (d *DOM) Index(index int) *DOM {
 	return &DOM{
 		jsValue: d.jsValue.Index(index),

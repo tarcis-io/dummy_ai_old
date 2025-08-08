@@ -123,10 +123,10 @@ func lookupLocalStorageTheme() (*Theme, bool) {
 
 // lookupPreferredTheme looks up the theme from the browser's preferred color scheme.
 func lookupPreferredTheme() (*Theme, bool) {
-	if dom.GetWindow().MatchMedia("(prefers-color-scheme: dark)") {
+	if dom.GetWindow().MatchMedia("(prefers-color-scheme: dark)").Matches() {
 		return darkTheme, true
 	}
-	if dom.GetWindow().MatchMedia("(prefers-color-scheme: light)") {
+	if dom.GetWindow().MatchMedia("(prefers-color-scheme: light)").Matches() {
 		return lightTheme, true
 	}
 	return nil, false

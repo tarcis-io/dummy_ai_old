@@ -1,15 +1,18 @@
 package dom
 
 type (
+	// Console represents the JavaScript Console object.
 	Console struct {
 		*DOM
 	}
 )
 
-func (c *Console) Log(text string) {
-	c.Call("log", text)
+// Log outputs the specified message to the console.
+func (c *Console) Log(message string) {
+	c.Call("log", message)
 }
 
+// GetConsole returns the current Console object.
 func GetConsole() *Console {
 	return GetWindow().Console()
 }

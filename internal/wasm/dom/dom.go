@@ -39,6 +39,18 @@ func (d *DOM) Truthy() bool {
 	return d.jsValue.Truthy()
 }
 
+// Length returns the length of the DOM object.
+func (d *DOM) Length() int {
+	return d.jsValue.Length()
+}
+
+// Index returns the DOM object at the given index.
+func (d *DOM) Index(index int) *DOM {
+	return &DOM{
+		jsValue: d.jsValue.Index(index),
+	}
+}
+
 // Get retrieves a property from the DOM object.
 func (d *DOM) Get(property string) *DOM {
 	return &DOM{

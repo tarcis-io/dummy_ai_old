@@ -7,12 +7,12 @@ type (
 	}
 )
 
-// SetItem sets the value for the given key in the Storage object.
+// SetItem sets the value for the specified key in the Storage object.
 func (s *Storage) SetItem(key, value string) {
 	s.Call("setItem", key, value)
 }
 
-// GetItem returns the value for the given key in the Storage object.
+// GetItem returns the value for the specified key in the Storage object.
 func (s *Storage) GetItem(key string) (string, bool) {
 	v := s.Call("getItem", key)
 	if v.Truthy() {

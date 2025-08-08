@@ -7,6 +7,13 @@ type (
 	}
 )
 
+// Console returns the Window's Console object.
+func (w *Window) Console() *Console {
+	return &Console{
+		DOM: w.Get("console"),
+	}
+}
+
 // Document returns the Window's Document object.
 func (w *Window) Document() *Document {
 	return &Document{

@@ -60,7 +60,7 @@ func AppVersion() string {
 	return currentLocale.AppVersion
 }
 
-// FetchLocale fetches the locale for the given language.
+// FetchLocale fetches the locale for the specified language.
 func FetchLocale(language *Language) *Locale {
 	if language.code == englishLanguage.code {
 		return englishLocale

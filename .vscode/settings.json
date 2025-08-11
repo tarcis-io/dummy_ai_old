@@ -1,27 +1,36 @@
 {
+	"breadcrumbs.enabled": false,
+	"debug.console.fontSize": 13,
 	"editor.detectIndentation": false,
 	"editor.folding": false,
+	"editor.fontFamily": "JetBrains Mono, Menlo, Monaco, Courier New, monospace",
+	"editor.fontSize": 13,
+	"editor.fontWeight": "normal",
 	"editor.insertSpaces": false,
+	"editor.letterSpacing": 0,
 	"editor.lightbulb.enabled": "off",
+	"editor.lineHeight": 1.5,
 	"editor.minimap.enabled": false,
 	"editor.stickyScroll.enabled": false,
+	"editor.wordWrap": "off",
 	"explorer.compactFolders": false,
-	"files.exclude": {
-		"**/*.idx": false,
-		"**/*.vscode": false,
-		"**/*.gitignore": false
-	},
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
-	"go.toolsEnvVars": {
-		"GOOS": "js",
-		"GOARCH": "wasm"
-	},
 	"html.format.indentInnerHtml": true,
-	"html.format.wrapLineLength": 256,
-	"IDX.aI.enableCodebaseIndexing": true,
-	"IDX.aI.enableInlineCompletion": true,
+	"html.format.wrapLineLength": 0,
+	"http.proxySupport": "off",
+	"inlineChat.mode": "preview",
 	"javascript.validate.enable": false,
+	"terminal.integrated.fontSize": 13,
+	"terminal.integrated.localEchoEnabled": "off",
+	"terminal.integrated.localEchoLatencyThreshold": -1,
+	"window.autoDetectColorScheme": true,
+	"window.commandCenter": false,
+	"workbench.iconTheme": "monospace",
+	"workbench.layoutControl.enabled": false,
+	"workbench.preferredDarkColorTheme": "Google Dark",
+	"workbench.preferredLightColorTheme": "Google Light",
+	"workbench.startupEditor": "none",
 	"[markdown]": {
 		"editor.wordWrap": "off"
 	}

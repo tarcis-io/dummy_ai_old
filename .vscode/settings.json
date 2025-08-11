@@ -1,4 +1,7 @@
 {
+	"[markdown]": {
+		"editor.wordWrap": "off"
+	},
 	"breadcrumbs.enabled": false,
 	"debug.console.fontSize": 13,
 	"editor.detectIndentation": false,
@@ -14,8 +17,20 @@
 	"editor.stickyScroll.enabled": false,
 	"editor.wordWrap": "off",
 	"explorer.compactFolders": false,
+	"files.exclude": {
+		"**/*.idx": true,
+		"**/*.gitignore": true
+	},
 	"files.insertFinalNewline": true,
 	"files.trimTrailingWhitespace": true,
+	"go.alternateTools": {
+		"go": "~/apps/go/bin/go"
+	},
+	"go.toolsEnvVars": {
+		"GOOS": "js",
+		"GOARCH": "wasm"
+	},
+	"go.toolsGopath": "~/apps/gopath",
 	"html.format.indentInnerHtml": true,
 	"html.format.wrapLineLength": 0,
 	"http.proxySupport": "off",
@@ -30,8 +45,5 @@
 	"workbench.layoutControl.enabled": false,
 	"workbench.preferredDarkColorTheme": "Google Dark",
 	"workbench.preferredLightColorTheme": "Google Light",
-	"workbench.startupEditor": "none",
-	"[markdown]": {
-		"editor.wordWrap": "off"
-	}
+	"workbench.startupEditor": "none"
 }
